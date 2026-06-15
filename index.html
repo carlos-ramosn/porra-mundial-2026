@@ -35,22 +35,12 @@
       border-radius: 8px;
       padding: 24px 24px 22px;
       background:
-        linear-gradient(90deg, var(--red) 0 16px, transparent 16px),
-        linear-gradient(110deg, transparent 0 74%, rgba(255,212,71,.94) 74% 78%, transparent 78% 82%, rgba(0,183,120,.82) 82% 86%, transparent 86%),
+        linear-gradient(90deg, var(--red) 0 6px, transparent 6px),
         rgba(6,18,38,.82);
       border: 1px solid rgba(255,255,255,.18);
-      box-shadow: 0 28px 80px rgba(0,0,0,.28);
+      box-shadow: 0 18px 44px rgba(0,0,0,.24);
       overflow: hidden;
       position: relative;
-    }
-    .hero::after {
-      content: "26";
-      position: absolute;
-      right: 18px;
-      bottom: -26px;
-      color: rgba(255,255,255,.06);
-      font: 900 9rem/.8 var(--display);
-      pointer-events: none;
     }
     .hero h1 { margin: 0 0 6px; font: 900 2.5rem/.9 var(--display); text-transform: uppercase; }
     .hero p { margin: 0; color: rgba(255,255,255,.82); font-weight: 750; }
@@ -58,12 +48,11 @@
     .nav a { color: #061226; background: var(--gold); padding: 9px 12px; border-radius: 6px; font: 900 .82rem var(--display); text-transform: uppercase; text-decoration: none; box-shadow: inset 0 -4px 0 rgba(6,18,38,.18); }
     .nav a:nth-child(2) { color: #fff; background: var(--blue); }
     .summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 14px 0; }
-    .tile { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; box-shadow: 0 18px 44px rgba(0,0,0,.16); position: relative; overflow: hidden; border-top: 6px solid var(--blue); }
+    .tile { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; box-shadow: 0 14px 34px rgba(0,0,0,.12); position: relative; overflow: hidden; border-top: 4px solid var(--blue); }
     .tile:nth-child(2) { border-top-color: var(--mint); }
-    .tile::before { content: ""; position: absolute; top: 0; right: 0; width: 56px; height: 56px; background: var(--gold); clip-path: polygon(100% 0, 100% 100%, 0 0); opacity: .9; }
     .tile strong { display: block; font: 900 1.7rem/1 var(--display); }
     .tile span { color: #526071; font-weight: 800; }
-    .panel { background: rgba(255,255,255,.96); border: 1px solid rgba(255,255,255,.44); border-radius: 8px; margin-top: 14px; overflow: hidden; box-shadow: 0 18px 52px rgba(0,0,0,.18); }
+    .panel { background: rgba(255,255,255,.96); border: 1px solid rgba(255,255,255,.44); border-radius: 8px; margin-top: 14px; overflow: hidden; box-shadow: 0 14px 38px rgba(0,0,0,.14); }
     .panel-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 14px 16px; color: #fff; background: linear-gradient(95deg, var(--navy), #0b2f6f 48%, #0b5f46); border-bottom: 4px solid var(--gold); }
     .panel-head h2 { margin: 0; font: 900 1.35rem/.95 var(--display); text-transform: uppercase; }
     .panel-head span { color: rgba(255,255,255,.78); font-weight: 850; }
@@ -72,12 +61,13 @@
     th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
     th { background: #061226; color: #fff; font: 900 .72rem var(--display); text-transform: uppercase; }
     .points { font: 900 1.15rem var(--display); }
-    .legend { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; background: #f7f9fc; border-bottom: 1px solid var(--line); }
-    .key { border-radius: 6px; padding: 7px 10px; font: 900 .72rem var(--display); text-transform: uppercase; color: #061226; border-left: 5px solid currentColor; background: #fff; }
-    .key.exact { color: #0f5fff; background: #edf5ff; }
-    .key.diff { color: #008c5a; background: #ecfff5; }
-    .key.sign { color: #8a6700; background: #fff7cf; }
-    .key.miss { color: #c5163a; background: #fff0f3; }
+    .legend { display: flex; flex-wrap: wrap; gap: 14px; padding: 10px 12px; background: #f7f9fc; border-bottom: 1px solid var(--line); color: #536174; font-size: .84rem; font-weight: 800; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+    .dot.exact { background: #0f5fff; }
+    .dot.diff { background: #00b778; }
+    .dot.sign { background: #ffd447; border: 1px solid rgba(8,18,37,.22); }
+    .dot.miss { background: #ff3158; }
     .match-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; padding: 12px; }
     .match-card { border: 1px solid var(--line); border-radius: 8px; background: #fff; overflow: hidden; box-shadow: 0 10px 26px rgba(8,18,37,.1); }
     .match-card header { display: flex; justify-content: space-between; gap: 10px; padding: 11px; background: #061226; color: #fff; border-left: 9px solid var(--red); }
@@ -180,10 +170,10 @@
         <span>Predicciones de todos</span>
       </div>
       <div class="legend">
-        <span class="key exact">Exacto</span>
-        <span class="key diff">Ganador + diferencia</span>
-        <span class="key sign">Solo ganador</span>
-        <span class="key miss">Ganador fallado</span>
+        <span><i class="dot exact"></i>Exacto</span>
+        <span><i class="dot diff"></i>Ganador + diferencia</span>
+        <span><i class="dot sign"></i>Solo ganador</span>
+        <span><i class="dot miss"></i>Ganador fallado</span>
       </div>
       <div class="match-grid">
         
