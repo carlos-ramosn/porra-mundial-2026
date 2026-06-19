@@ -47,6 +47,10 @@
     .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
     .nav a { color: #061226; background: var(--gold); padding: 9px 12px; border-radius: 6px; font: 900 .82rem var(--display); text-transform: uppercase; text-decoration: none; box-shadow: inset 0 -4px 0 rgba(6,18,38,.18); }
     .nav a:nth-child(2) { color: #fff; background: var(--blue); }
+    .history-gate { display: flex; justify-content: center; margin: 16px 0 2px; }
+    .history-button { color: #fff; background: #061226; border: 2px solid var(--gold); padding: 12px 16px; border-radius: 8px; font: 900 .9rem var(--display); text-transform: uppercase; text-decoration: none; box-shadow: 0 12px 28px rgba(0,0,0,.18); }
+    .history-button:hover { background: var(--gold); color: #061226; }
+    .history-stack { display: grid; gap: 14px; margin-top: 14px; }
     .summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 14px 0; }
     .tile { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; box-shadow: 0 14px 34px rgba(0,0,0,.12); position: relative; overflow: hidden; border-top: 4px solid var(--blue); }
     .tile:nth-child(2) { border-top-color: var(--mint); }
@@ -61,6 +65,16 @@
     th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
     th { background: #061226; color: #fff; font: 900 .72rem var(--display); text-transform: uppercase; }
     .points { font: 900 1.15rem var(--display); }
+    .compact th, .compact td { padding: 8px 10px; }
+    .week-list { display: grid; gap: 10px; padding: 12px; background: #f7f9fc; border-top: 1px solid var(--line); }
+    .week-detail { border: 1px solid var(--line); border-radius: 8px; background: #fff; overflow: hidden; }
+    .week-detail summary { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 12px 14px; cursor: pointer; list-style: none; }
+    .week-detail summary::-webkit-details-marker { display: none; }
+    .week-detail summary strong { font: 900 .98rem var(--display); text-transform: uppercase; }
+    .week-detail summary span { color: #526071; font-weight: 850; }
+    .week-detail summary::after { content: "+"; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; background: var(--gold); color: #061226; font: 900 1.1rem var(--display); }
+    .week-detail[open] summary::after { content: "-"; }
+    .history-list { background: #fff; }
     .legend { display: flex; flex-wrap: wrap; gap: 14px; padding: 10px 12px; background: #f7f9fc; border-bottom: 1px solid var(--line); color: #536174; font-size: .84rem; font-weight: 800; }
     .legend span { display: inline-flex; align-items: center; gap: 6px; }
     .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
@@ -97,77 +111,87 @@
   <main class="wrap">
     <section class="hero">
       <h1>Porra Mundial 2026</h1>
-      <p>Semana 1 · Actualizado 18 jun 2026, 9:23 · Refrescos del dia de bocata en juego.</p>
+      <p>Semana 2 · Actualizado 19 jun 2026, 9:17 · Refrescos del dia de bocata en juego.</p>
       <nav class="nav">
-        <a href="#clasificacion">Clasificacion</a>
-        <a href="#cuadro">Cuadro por partido</a>
+        <a href="#clasificacion">Jornada</a><a href="#cuadro">Partidos actuales</a>
       </nav>
     </section>
-    <section class="summary">
-      <div class="tile"><strong>6</strong><span>Participantes</span></div>
-      <div class="tile"><strong>12/12</strong><span>Partidos jugados</span></div>
-    </section>
     
+      <section class="summary">
+        <div class="tile"><strong>4</strong><span>Participantes</span></div>
+        <div class="tile"><strong>0/30</strong><span>Partidos jugados</span></div>
+      </section>
+      
     <section class="panel leaderboard-panel" id="clasificacion">
       <div class="panel-head">
-        <h2>Clasificacion</h2>
-        <span>12/12 partidos jugados</span>
+        <h2>Jornada Actual</h2>
+        <span>0/30 partidos jugados</span>
       </div>
-      <table class="leaderboard">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Participante</th>
-            <th>Puntos</th>
-          </tr>
-        </thead>
-        <tbody>
-          
+      
+        <table class="leaderboard">
+          <thead>
             <tr>
-              <td><strong>1</strong></td>
-              <td>Gonzalo Carrero</td>
-              <td class="points">24</td>
+              <th>#</th>
+              <th>Participante</th>
+              <th>Puntos</th>
+              <th>Exactos</th>
+              <th>Diferencias</th>
+              <th>Ganador</th>
+              <th>Partidos</th>
             </tr>
-          
-            <tr>
-              <td><strong>2</strong></td>
-              <td>Alberto Erhardt</td>
-              <td class="points">23</td>
-            </tr>
-          
-            <tr>
-              <td><strong>3</strong></td>
-              <td>Serena &amp; Andrea</td>
-              <td class="points">17</td>
-            </tr>
-          
-            <tr>
-              <td><strong>4</strong></td>
-              <td>Carlos</td>
-              <td class="points">14</td>
-            </tr>
-          
-            <tr>
-              <td><strong>5</strong></td>
-              <td>Diego</td>
-              <td class="points">14</td>
-            </tr>
-          
-            <tr>
-              <td><strong>6</strong></td>
-              <td>Jose</td>
-              <td class="points">11</td>
-            </tr>
-          
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            
+    <tr>
+      <td><strong>1</strong></td>
+      <td>Carlos</td>
+      <td class="points">0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  
+    <tr>
+      <td><strong>2</strong></td>
+      <td>Dani</td>
+      <td class="points">0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  
+    <tr>
+      <td><strong>3</strong></td>
+      <td>Gonzalo Carrero</td>
+      <td class="points">0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  
+    <tr>
+      <td><strong>4</strong></td>
+      <td>Serena &amp; Andrea</td>
+      <td class="points">0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  
+          </tbody>
+        </table>
+      
     </section>
   
-    
+      
     <section class="panel" id="cuadro">
       <div class="panel-head">
-        <h2>Cuadro por partido</h2>
-        <span>Predicciones de todos</span>
+        <h2>Partidos de la jornada actual</h2>
+        <span>30 partidos</span>
       </div>
       <div class="legend">
         <span><i class="dot exact"></i>Exacto</span>
@@ -175,686 +199,1293 @@
         <span><i class="dot sign"></i>Solo ganador</span>
         <span><i class="dot miss"></i>Ganador fallado</span>
       </div>
+      
       <div class="match-grid">
         
-            <article class="match-card match-played">
+            <article class="match-card match-pending">
               <header>
                 <div>
-                  <strong>España vs Cabo Verde</strong>
-                  <span>2026-06-15 · 18:00 · Grupo H</span>
+                  <strong>Chequia vs Sudáfrica</strong>
+                  <span>2026-06-18 · 18:00 · Grupo A</span>
                 </div>
-                <b class="result-pill played">Resultado 0-0</b>
+                <b class="result-pill ">Pendiente</b>
               </header>
               <table>
                 <tbody>
                   
-                      <tr class="pick-miss">
-                        <td>Alberto Erhardt</td>
-                        <td>6-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>1-1</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-miss">
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>2-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>1-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>1-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Suiza vs Bosnia y Herzegovina</strong>
+                  <span>2026-06-18 · 21:00 · Grupo B</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>0-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>1-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Canadá vs Catar</strong>
+                  <span>2026-06-19 · 00:00 · Grupo B</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>1-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>2-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>México vs Corea del Sur</strong>
+                  <span>2026-06-19 · 03:00 · Grupo A</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>2-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>2-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>1-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>3-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Estados Unidos vs Australia</strong>
+                  <span>2026-06-19 · 21:00 · Grupo D</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>4-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>3-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>2-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>1-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Escocia vs Marruecos</strong>
+                  <span>2026-06-20 · 00:00 · Grupo C</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>1-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>1-3</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>0-3</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>0-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Brasil vs Haití</strong>
+                  <span>2026-06-20 · 02:30 · Grupo C</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
                         <td>Carlos</td>
                         <td>5-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-miss">
-                        <td>Diego</td>
-                        <td>4-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>5-0</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-miss">
+                      <tr class="pick-pending">
                         <td>Gonzalo Carrero</td>
-                        <td>3-1</td>
-                        <td>Fallado</td>
-                        <td>0</td>
+                        <td>5-0</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-miss">
-                        <td>Jose</td>
-                        <td>3-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
+                      <tr class="pick-pending">
                         <td>Serena &amp; Andrea</td>
-                        <td>3-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
+                        <td>5-0</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
                 </tbody>
               </table>
             </article>
           
-            <article class="match-card match-played">
+            <article class="match-card match-pending">
               <header>
                 <div>
-                  <strong>Bélgica vs Egipto</strong>
-                  <span>2026-06-15 · 21:00 · Grupo G</span>
+                  <strong>Turquía vs Paraguay</strong>
+                  <span>2026-06-20 · 05:00 · Grupo D</span>
                 </div>
-                <b class="result-pill played">Resultado 1-1</b>
+                <b class="result-pill ">Pendiente</b>
               </header>
               <table>
                 <tbody>
                   
-                      <tr class="pick-diff">
-                        <td>Alberto Erhardt</td>
-                        <td>2-2</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
+                      <tr class="pick-pending">
                         <td>Carlos</td>
-                        <td>2-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Diego</td>
-                        <td>3-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Gonzalo Carrero</td>
-                        <td>1-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Jose</td>
-                        <td>2-1</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Serena &amp; Andrea</td>
-                        <td>2-1</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                </tbody>
-              </table>
-            </article>
-          
-            <article class="match-card match-played">
-              <header>
-                <div>
-                  <strong>Arabia Saudí vs Uruguay</strong>
-                  <span>2026-06-16 · 00:00 · Grupo H</span>
-                </div>
-                <b class="result-pill played">Resultado 1-1</b>
-              </header>
-              <table>
-                <tbody>
-                  
-                      <tr class="pick-miss">
-                        <td>Alberto Erhardt</td>
-                        <td>1-3</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Carlos</td>
-                        <td>0-2</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Diego</td>
-                        <td>0-2</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Gonzalo Carrero</td>
-                        <td>0-2</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Jose</td>
-                        <td>0-3</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Serena &amp; Andrea</td>
-                        <td>1-3</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                </tbody>
-              </table>
-            </article>
-          
-            <article class="match-card match-played">
-              <header>
-                <div>
-                  <strong>Irán vs Nueva Zelanda</strong>
-                  <span>2026-06-16 · 03:00 · Grupo G</span>
-                </div>
-                <b class="result-pill played">Resultado 2-2</b>
-              </header>
-              <table>
-                <tbody>
-                  
-                      <tr class="pick-diff">
-                        <td>Alberto Erhardt</td>
-                        <td>1-1</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Carlos</td>
-                        <td>1-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-diff">
-                        <td>Diego</td>
-                        <td>1-1</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
-                      </tr>
-                    
-                      <tr class="pick-diff">
-                        <td>Gonzalo Carrero</td>
                         <td>0-0</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-diff">
-                        <td>Jose</td>
-                        <td>1-1</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Serena &amp; Andrea</td>
+                      <tr class="pick-pending">
+                        <td>Dani</td>
                         <td>2-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                </tbody>
-              </table>
-            </article>
-          
-            <article class="match-card match-played">
-              <header>
-                <div>
-                  <strong>Francia vs Senegal</strong>
-                  <span>2026-06-16 · 21:00 · Grupo I</span>
-                </div>
-                <b class="result-pill played">Resultado 3-1</b>
-              </header>
-              <table>
-                <tbody>
-                  
-                      <tr class="pick-exact">
-                        <td>Alberto Erhardt</td>
-                        <td>3-1</td>
-                        <td>Exacto</td>
-                        <td>7</td>
-                      </tr>
-                    
-                      <tr class="pick-exact">
-                        <td>Carlos</td>
-                        <td>3-1</td>
-                        <td>Exacto</td>
-                        <td>7</td>
-                      </tr>
-                    
-                      <tr class="pick-exact">
-                        <td>Diego</td>
-                        <td>3-1</td>
-                        <td>Exacto</td>
-                        <td>7</td>
-                      </tr>
-                    
-                      <tr class="pick-diff">
+                      <tr class="pick-pending">
                         <td>Gonzalo Carrero</td>
-                        <td>2-0</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td>2-1</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-sign">
-                        <td>Jose</td>
-                        <td>4-0</td>
-                        <td>Ganador</td>
-                        <td>1</td>
-                      </tr>
-                    
-                      <tr class="pick-exact">
+                      <tr class="pick-pending">
                         <td>Serena &amp; Andrea</td>
-                        <td>3-1</td>
-                        <td>Exacto</td>
-                        <td>7</td>
+                        <td>2-1</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
                 </tbody>
               </table>
             </article>
           
-            <article class="match-card match-played">
+            <article class="match-card match-pending">
               <header>
                 <div>
-                  <strong>Irak vs Noruega</strong>
-                  <span>2026-06-17 · 00:00 · Grupo I</span>
+                  <strong>Países Bajos vs Suecia</strong>
+                  <span>2026-06-20 · 19:00 · Grupo F</span>
                 </div>
-                <b class="result-pill played">Resultado 1-4</b>
+                <b class="result-pill ">Pendiente</b>
               </header>
               <table>
                 <tbody>
                   
-                      <tr class="pick-sign">
-                        <td>Alberto Erhardt</td>
-                        <td>0-2</td>
-                        <td>Ganador</td>
-                        <td>1</td>
-                      </tr>
-                    
-                      <tr class="pick-sign">
+                      <tr class="pick-pending">
                         <td>Carlos</td>
-                        <td>1-3</td>
-                        <td>Ganador</td>
-                        <td>1</td>
+                        <td>1-0</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-sign">
-                        <td>Diego</td>
-                        <td>0-2</td>
-                        <td>Ganador</td>
-                        <td>1</td>
-                      </tr>
-                    
-                      <tr class="pick-sign">
-                        <td>Gonzalo Carrero</td>
-                        <td>0-1</td>
-                        <td>Ganador</td>
-                        <td>1</td>
-                      </tr>
-                    
-                      <tr class="pick-diff">
-                        <td>Jose</td>
-                        <td>0-3</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
-                      </tr>
-                    
-                      <tr class="pick-sign">
-                        <td>Serena &amp; Andrea</td>
-                        <td>0-1</td>
-                        <td>Ganador</td>
-                        <td>1</td>
-                      </tr>
-                    
-                </tbody>
-              </table>
-            </article>
-          
-            <article class="match-card match-played">
-              <header>
-                <div>
-                  <strong>Argentina vs Argelia</strong>
-                  <span>2026-06-17 · 03:00 · Grupo J</span>
-                </div>
-                <b class="result-pill played">Resultado 3-0</b>
-              </header>
-              <table>
-                <tbody>
-                  
-                      <tr class="pick-exact">
-                        <td>Alberto Erhardt</td>
-                        <td>3-0</td>
-                        <td>Exacto</td>
-                        <td>7</td>
-                      </tr>
-                    
-                      <tr class="pick-sign">
-                        <td>Carlos</td>
-                        <td>2-0</td>
-                        <td>Ganador</td>
-                        <td>1</td>
-                      </tr>
-                    
-                      <tr class="pick-diff">
-                        <td>Diego</td>
+                      <tr class="pick-pending">
+                        <td>Dani</td>
                         <td>4-1</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-exact">
+                      <tr class="pick-pending">
                         <td>Gonzalo Carrero</td>
-                        <td>3-0</td>
-                        <td>Exacto</td>
-                        <td>7</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-sign">
-                        <td>Jose</td>
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>3-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Alemania vs Costa de Marfil</strong>
+                  <span>2026-06-20 · 22:00 · Grupo E</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>3-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
                         <td>4-0</td>
-                        <td>Ganador</td>
-                        <td>1</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-exact">
-                        <td>Serena &amp; Andrea</td>
-                        <td>3-0</td>
-                        <td>Exacto</td>
-                        <td>7</td>
-                      </tr>
-                    
-                </tbody>
-              </table>
-            </article>
-          
-            <article class="match-card match-played">
-              <header>
-                <div>
-                  <strong>Austria vs Jordania</strong>
-                  <span>2026-06-17 · 06:00 · Grupo J</span>
-                </div>
-                <b class="result-pill played">Resultado 3-1</b>
-              </header>
-              <table>
-                <tbody>
-                  
-                      <tr class="pick-diff">
-                        <td>Alberto Erhardt</td>
-                        <td>2-0</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
-                      </tr>
-                    
-                      <tr class="pick-sign">
-                        <td>Carlos</td>
-                        <td>1-0</td>
-                        <td>Ganador</td>
-                        <td>1</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Diego</td>
-                        <td>0-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-diff">
+                      <tr class="pick-pending">
                         <td>Gonzalo Carrero</td>
-                        <td>2-0</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td>1-1</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-sign">
-                        <td>Jose</td>
-                        <td>1-0</td>
-                        <td>Ganador</td>
-                        <td>1</td>
-                      </tr>
-                    
-                      <tr class="pick-sign">
+                      <tr class="pick-pending">
                         <td>Serena &amp; Andrea</td>
-                        <td>1-0</td>
-                        <td>Ganador</td>
-                        <td>1</td>
+                        <td>4-1</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
                 </tbody>
               </table>
             </article>
           
-            <article class="match-card match-played">
+            <article class="match-card match-pending">
               <header>
                 <div>
-                  <strong>Portugal vs RD Congo</strong>
-                  <span>2026-06-17 · 19:00 · Grupo K</span>
+                  <strong>Ecuador vs Curaçao</strong>
+                  <span>2026-06-21 · 02:00 · Grupo E</span>
                 </div>
-                <b class="result-pill played">Resultado 1-1</b>
+                <b class="result-pill ">Pendiente</b>
               </header>
               <table>
                 <tbody>
                   
-                      <tr class="pick-miss">
-                        <td>Alberto Erhardt</td>
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>4-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>4-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>5-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>1-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Túnez vs Japón</strong>
+                  <span>2026-06-21 · 06:00 · Grupo F</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>0-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>0-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>1-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>0-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>España vs Arabia Saudí</strong>
+                  <span>2026-06-21 · 18:00 · Grupo H</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
                         <td>3-1</td>
-                        <td>Fallado</td>
-                        <td>0</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-miss">
-                        <td>Carlos</td>
-                        <td>3-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Diego</td>
-                        <td>3-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Gonzalo Carrero</td>
-                        <td>3-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Jose</td>
-                        <td>3-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Serena &amp; Andrea</td>
+                      <tr class="pick-pending">
+                        <td>Dani</td>
                         <td>2-0</td>
-                        <td>Fallado</td>
-                        <td>0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>2-1</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
                 </tbody>
               </table>
             </article>
           
-            <article class="match-card match-played">
+            <article class="match-card match-pending">
               <header>
                 <div>
-                  <strong>Inglaterra vs Croacia</strong>
-                  <span>2026-06-17 · 22:00 · Grupo L</span>
+                  <strong>Bélgica vs Irán</strong>
+                  <span>2026-06-21 · 21:00 · Grupo G</span>
                 </div>
-                <b class="result-pill played">Resultado 4-2</b>
+                <b class="result-pill ">Pendiente</b>
               </header>
               <table>
                 <tbody>
                   
-                      <tr class="pick-miss">
-                        <td>Alberto Erhardt</td>
-                        <td>2-2</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-sign">
+                      <tr class="pick-pending">
                         <td>Carlos</td>
-                        <td>3-0</td>
-                        <td>Ganador</td>
-                        <td>1</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Diego</td>
-                        <td>2-2</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-sign">
-                        <td>Gonzalo Carrero</td>
-                        <td>2-1</td>
-                        <td>Ganador</td>
-                        <td>1</td>
-                      </tr>
-                    
-                      <tr class="pick-diff">
-                        <td>Jose</td>
                         <td>2-0</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-miss">
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>4-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
                         <td>Serena &amp; Andrea</td>
-                        <td>2-2</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                </tbody>
-              </table>
-            </article>
-          
-            <article class="match-card match-played">
-              <header>
-                <div>
-                  <strong>Ghana vs Panamá</strong>
-                  <span>2026-06-18 · 01:00 · Grupo L</span>
-                </div>
-                <b class="result-pill played">Resultado 1-0</b>
-              </header>
-              <table>
-                <tbody>
-                  
-                      <tr class="pick-sign">
-                        <td>Alberto Erhardt</td>
-                        <td>2-0</td>
-                        <td>Ganador</td>
-                        <td>1</td>
-                      </tr>
-                    
-                      <tr class="pick-diff">
-                        <td>Carlos</td>
-                        <td>2-1</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Diego</td>
-                        <td>1-1</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-exact">
-                        <td>Gonzalo Carrero</td>
                         <td>1-0</td>
-                        <td>Exacto</td>
-                        <td>7</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Jose</td>
-                        <td>1-1</td>
-                        <td>Fallado</td>
-                        <td>0</td>
-                      </tr>
-                    
-                      <tr class="pick-miss">
-                        <td>Serena &amp; Andrea</td>
-                        <td>1-1</td>
-                        <td>Fallado</td>
-                        <td>0</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
                 </tbody>
               </table>
             </article>
           
-            <article class="match-card match-played">
+            <article class="match-card match-pending">
               <header>
                 <div>
-                  <strong>Uzbekistán vs Colombia</strong>
-                  <span>2026-06-18 · 04:00 · Grupo K</span>
+                  <strong>Uruguay vs Cabo Verde</strong>
+                  <span>2026-06-22 · 00:00 · Grupo H</span>
                 </div>
-                <b class="result-pill played">Resultado 1-3</b>
+                <b class="result-pill ">Pendiente</b>
               </header>
               <table>
                 <tbody>
                   
-                      <tr class="pick-sign">
-                        <td>Alberto Erhardt</td>
-                        <td>0-3</td>
-                        <td>Ganador</td>
-                        <td>1</td>
-                      </tr>
-                    
-                      <tr class="pick-sign">
+                      <tr class="pick-pending">
                         <td>Carlos</td>
-                        <td>0-4</td>
-                        <td>Ganador</td>
-                        <td>1</td>
+                        <td>3-0</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-diff">
-                        <td>Diego</td>
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>4-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>3-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Nueva Zelanda vs Egipto</strong>
+                  <span>2026-06-22 · 03:00 · Grupo G</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
                         <td>0-2</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-diff">
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>0-3</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>0-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>0-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Argentina vs Austria</strong>
+                  <span>2026-06-22 · 19:00 · Grupo J</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>3-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>3-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>2-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>3-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Francia vs Irak</strong>
+                  <span>2026-06-22 · 23:00 · Grupo I</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>2-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>4-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>3-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Noruega vs Senegal</strong>
+                  <span>2026-06-23 · 02:00 · Grupo I</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>1-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>3-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>1-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>1-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Jordania vs Argelia</strong>
+                  <span>2026-06-23 · 05:00 · Grupo J</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>0-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>1-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
                         <td>Gonzalo Carrero</td>
                         <td>0-2</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-diff">
-                        <td>Jose</td>
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>0-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Portugal vs Uzbekistán</strong>
+                  <span>2026-06-23 · 19:00 · Grupo K</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>6-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>3-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>4-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Inglaterra vs Ghana</strong>
+                  <span>2026-06-23 · 22:00 · Grupo L</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>5-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>3-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>3-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Panamá vs Croacia</strong>
+                  <span>2026-06-24 · 01:00 · Grupo L</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>0-3</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>0-3</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
                         <td>0-2</td>
-                        <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
-                      <tr class="pick-sign">
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>0-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Colombia vs RD Congo</strong>
+                  <span>2026-06-24 · 04:00 · Grupo K</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>3-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>2-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>2-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Bosnia y Herzegovina vs Catar</strong>
+                  <span>2026-06-24 · 21:00 · Grupo B</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>1-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>3-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>1-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Suiza vs Canadá</strong>
+                  <span>2026-06-24 · 21:00 · Grupo B</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>1-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>1-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>2-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>1-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Marruecos vs Haití</strong>
+                  <span>2026-06-25 · 00:00 · Grupo C</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>4-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>2-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>4-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>3-0</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Escocia vs Brasil</strong>
+                  <span>2026-06-25 · 00:00 · Grupo C</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>1-3</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>1-3</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>1-3</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
                         <td>Serena &amp; Andrea</td>
                         <td>1-2</td>
-                        <td>Ganador</td>
-                        <td>1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Chequia vs México</strong>
+                  <span>2026-06-25 · 03:00 · Grupo A</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>1-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>1-3</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>0-1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>2-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                </tbody>
+              </table>
+            </article>
+          
+            <article class="match-card match-pending">
+              <header>
+                <div>
+                  <strong>Sudáfrica vs Corea del Sur</strong>
+                  <span>2026-06-25 · 03:00 · Grupo A</span>
+                </div>
+                <b class="result-pill ">Pendiente</b>
+              </header>
+              <table>
+                <tbody>
+                  
+                      <tr class="pick-pending">
+                        <td>Carlos</td>
+                        <td>0-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Dani</td>
+                        <td>1-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Gonzalo Carrero</td>
+                        <td>0-2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    
+                      <tr class="pick-pending">
+                        <td>Serena &amp; Andrea</td>
+                        <td>2-1</td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     
                 </tbody>
@@ -864,6 +1495,12 @@
       </div>
     </section>
   
+      
+    <section class="history-gate">
+      <a class="history-button" href="historico.html">Acceder a histórico</a>
+    </section>
+  
+    
     <footer>Pagina estatica generada desde el HTML consolidado.</footer>
   </main>
 </body>
