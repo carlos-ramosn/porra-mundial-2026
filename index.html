@@ -65,6 +65,12 @@
     th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
     th { background: #061226; color: #fff; font: 900 .72rem var(--display); text-transform: uppercase; }
     .points { font: 900 1.15rem var(--display); }
+    .leaderboard tr.is-disqualified { background: #eef1f5; color: #6b7280; opacity: .72; }
+    .leaderboard tr.is-disqualified .points { color: #6b7280; }
+    .leaderboard tr.is-disqualified .participant-name { text-decoration: line-through; text-decoration-thickness: 2px; }
+    .participant-cell { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+    .participant-cell small { flex-basis: 100%; color: #5e0618; font-size: .68rem; font-weight: 900; text-transform: uppercase; }
+    .status-flag { display: inline-flex; align-items: center; border-radius: 999px; padding: 3px 7px; color: #fff; background: #061226; border: 1px solid rgba(8,18,37,.22); font: 900 .68rem var(--display); text-transform: uppercase; }
     .compact th, .compact td { padding: 8px 10px; }
     .week-list { display: grid; gap: 10px; padding: 12px; background: #f7f9fc; border-top: 1px solid var(--line); }
     .week-detail { border: 1px solid var(--line); border-radius: 8px; background: #fff; overflow: hidden; }
@@ -111,7 +117,7 @@
   <main class="wrap">
     <section class="hero">
       <h1>Porra Mundial 2026</h1>
-      <p>Semana 2 · Actualizado 23 jun 2026, 9:46 · Refrescos del dia de bocata en juego.</p>
+      <p>Semana 2 · Actualizado 24 jun 2026, 8:30 · Refrescos del dia de bocata en juego.</p>
       <nav class="nav">
         <a href="#clasificacion">Jornada</a><a href="#cuadro">Partidos actuales</a>
       </nav>
@@ -119,13 +125,13 @@
     
       <section class="summary">
         <div class="tile"><strong>6</strong><span>Participantes</span></div>
-        <div class="tile"><strong>20/30</strong><span>Partidos jugados</span></div>
+        <div class="tile"><strong>24/30</strong><span>Partidos jugados</span></div>
       </section>
       
     <section class="panel leaderboard-panel" id="clasificacion">
       <div class="panel-head">
         <h2>Jornada Actual</h2>
-        <span>20/30 partidos jugados</span>
+        <span>24/30 partidos jugados</span>
       </div>
       
         <table class="leaderboard">
@@ -145,61 +151,67 @@
     <tr>
       <td><strong>1</strong></td>
       <td>Alberto Erhardt</td>
-      <td class="points">24</td>
+      <td class="points">27</td>
       <td>2</td>
       <td>6</td>
-      <td>12</td>
-      <td>20</td>
+      <td>15</td>
+      <td>24</td>
     </tr>
   
     <tr>
       <td><strong>2</strong></td>
       <td>Carlos</td>
-      <td class="points">23</td>
+      <td class="points">27</td>
       <td>1</td>
-      <td>6</td>
-      <td>14</td>
-      <td>20</td>
+      <td>7</td>
+      <td>17</td>
+      <td>24</td>
     </tr>
   
     <tr>
       <td><strong>3</strong></td>
       <td>Serena &amp; Andrea</td>
-      <td class="points">22</td>
+      <td class="points">25</td>
       <td>1</td>
       <td>5</td>
-      <td>14</td>
-      <td>20</td>
+      <td>17</td>
+      <td>24</td>
     </tr>
   
     <tr>
       <td><strong>4</strong></td>
-      <td>Diego</td>
+      <td>Gonzalo Carrero</td>
       <td class="points">16</td>
+      <td>0</td>
       <td>1</td>
-      <td>4</td>
-      <td>9</td>
-      <td>20</td>
+      <td>15</td>
+      <td>24</td>
     </tr>
   
     <tr>
       <td><strong>5</strong></td>
-      <td>Gonzalo Carrero</td>
-      <td class="points">12</td>
+      <td>Dani</td>
+      <td class="points">15</td>
       <td>0</td>
-      <td>0</td>
-      <td>12</td>
-      <td>20</td>
+      <td>1</td>
+      <td>14</td>
+      <td>24</td>
     </tr>
   
-    <tr>
-      <td><strong>6</strong></td>
-      <td>Dani</td>
-      <td class="points">11</td>
-      <td>0</td>
-      <td>0</td>
+    <tr class="is-disqualified">
+      <td><strong>DQ</strong></td>
+      <td>
+    <span class="participant-cell">
+      <span class="participant-name">Diego</span>
+      <span class="status-flag">Descalificado</span>
+      <small>Fuera de competicion</small>
+    </span>
+  </td>
+      <td class="points">18</td>
+      <td>1</td>
+      <td>4</td>
       <td>11</td>
-      <td>20</td>
+      <td>24</td>
     </tr>
   
           </tbody>
@@ -1362,228 +1374,228 @@
               </table>
             </article>
           
-            <article class="match-card match-pending">
+            <article class="match-card match-played">
               <header>
                 <div>
                   <strong>Portugal vs Uzbekistán</strong>
                   <span>2026-06-23 · 19:00 · Grupo K</span>
                 </div>
-                <b class="result-pill ">Pendiente</b>
+                <b class="result-pill played">Resultado 5-0</b>
               </header>
               <table>
                 <tbody>
                   
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Alberto Erhardt</td>
                         <td>2-0</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-diff">
                         <td>Carlos</td>
                         <td>6-1</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador + dif.</td>
+                        <td>2</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Dani</td>
                         <td>3-0</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Diego</td>
                         <td>2-0</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Gonzalo Carrero</td>
                         <td>4-0</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Serena &amp; Andrea</td>
                         <td>2-0</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
                 </tbody>
               </table>
             </article>
           
-            <article class="match-card match-pending">
+            <article class="match-card match-played">
               <header>
                 <div>
                   <strong>Inglaterra vs Ghana</strong>
                   <span>2026-06-23 · 22:00 · Grupo L</span>
                 </div>
-                <b class="result-pill ">Pendiente</b>
+                <b class="result-pill played">Resultado 0-0</b>
               </header>
               <table>
                 <tbody>
                   
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Alberto Erhardt</td>
                         <td>3-1</td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado</td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Carlos</td>
                         <td>2-0</td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado</td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Dani</td>
                         <td>5-0</td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado</td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Diego</td>
                         <td>3-1</td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado</td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Gonzalo Carrero</td>
                         <td>3-0</td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado</td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Serena &amp; Andrea</td>
                         <td>3-0</td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado</td>
+                        <td>0</td>
                       </tr>
                     
                 </tbody>
               </table>
             </article>
           
-            <article class="match-card match-pending">
+            <article class="match-card match-played">
               <header>
                 <div>
                   <strong>Panamá vs Croacia</strong>
                   <span>2026-06-24 · 01:00 · Grupo L</span>
                 </div>
-                <b class="result-pill ">Pendiente</b>
+                <b class="result-pill played">Resultado 0-1</b>
               </header>
               <table>
                 <tbody>
                   
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Alberto Erhardt</td>
                         <td>0-2</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Carlos</td>
                         <td>0-3</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Dani</td>
                         <td>0-3</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Diego</td>
                         <td>0-2</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Gonzalo Carrero</td>
                         <td>0-2</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Serena &amp; Andrea</td>
                         <td>0-2</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
                 </tbody>
               </table>
             </article>
           
-            <article class="match-card match-pending">
+            <article class="match-card match-played">
               <header>
                 <div>
                   <strong>Colombia vs RD Congo</strong>
                   <span>2026-06-24 · 04:00 · Grupo K</span>
                 </div>
-                <b class="result-pill ">Pendiente</b>
+                <b class="result-pill played">Resultado 1-0</b>
               </header>
               <table>
                 <tbody>
                   
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Alberto Erhardt</td>
                         <td>2-0</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Carlos</td>
                         <td>3-0</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-diff">
                         <td>Dani</td>
                         <td>2-1</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador + dif.</td>
+                        <td>2</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Diego</td>
                         <td>1-1</td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado</td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-diff">
                         <td>Gonzalo Carrero</td>
                         <td>2-1</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador + dif.</td>
+                        <td>2</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Serena &amp; Andrea</td>
                         <td>2-0</td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador</td>
+                        <td>1</td>
                       </tr>
                     
                 </tbody>
