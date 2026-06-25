@@ -71,6 +71,25 @@
     .participant-cell { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
     .participant-cell small { flex-basis: 100%; color: #5e0618; font-size: .68rem; font-weight: 900; text-transform: uppercase; }
     .status-flag { display: inline-flex; align-items: center; border-radius: 999px; padding: 3px 7px; color: #fff; background: #061226; border: 1px solid rgba(8,18,37,.22); font: 900 .68rem var(--display); text-transform: uppercase; }
+    .refreshments-body { padding: 12px; background: #f7f9fc; display: grid; gap: 12px; }
+    .refreshment-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+    .refreshment-card { display: grid; gap: 12px; padding: 14px; border-radius: 8px; border: 1px solid rgba(8,18,37,.14); background: linear-gradient(135deg, #fff 0 68%, rgba(255,212,71,.35) 68% 100%); box-shadow: 0 12px 28px rgba(8,18,37,.1); border-top: 5px solid var(--red); }
+    .refreshment-card.settled { border-top-color: var(--mint); background: linear-gradient(135deg, #fff 0 70%, rgba(0,183,120,.18) 70% 100%); }
+    .refreshment-card strong { display: block; font: 900 1.25rem/1 var(--display); text-transform: uppercase; }
+    .refreshment-card small { color: #526071; font-weight: 850; }
+    .refreshment-kicker { display: inline-flex; margin-bottom: 5px; padding: 4px 7px; border-radius: 999px; color: #fff; background: #061226; font: 900 .68rem var(--display); text-transform: uppercase; }
+    .refreshment-count { display: flex; align-items: end; gap: 7px; color: #061226; }
+    .refreshment-count b { font: 900 2.4rem/.8 var(--display); color: var(--red); }
+    .refreshment-card.settled .refreshment-count b { color: var(--mint); }
+    .refreshment-count span { font-weight: 900; text-transform: uppercase; }
+    .creditor-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .creditor-chips span { border-radius: 999px; padding: 6px 8px; color: #061226; background: #ffd447; font-weight: 900; font-size: .78rem; }
+    .refreshment-ledger { overflow: hidden; border-radius: 8px; background: #fff; border: 1px solid var(--line); }
+    .refreshment-ledger tr.settled { color: #6b7280; background: #eef8f2; }
+    .debt-arrow { color: var(--blue); text-align: center; font: 900 1.2rem var(--display); }
+    .debt-status { display: inline-flex; border-radius: 999px; padding: 5px 8px; font: 900 .72rem var(--display); text-transform: uppercase; }
+    .debt-status.pending { color: #fff; background: var(--red); }
+    .debt-status.paid { color: #053621; background: #dff8e9; }
     .compact th, .compact td { padding: 8px 10px; }
     .week-list { display: grid; gap: 10px; padding: 12px; background: #f7f9fc; border-top: 1px solid var(--line); }
     .week-detail { border: 1px solid var(--line); border-radius: 8px; background: #fff; overflow: hidden; }
@@ -1944,6 +1963,127 @@
               </table>
             </article>
           
+      </div>
+    </section>
+  
+      
+    <section class="panel refreshments-panel" id="refrescos">
+      <div class="panel-head">
+        <h2>Saldo de refrescos</h2>
+        <span>8/8 pendientes</span>
+      </div>
+      <div class="refreshments-body">
+        <div class="refreshment-summary">
+          
+            <article class="refreshment-card ">
+              <div>
+                <span class="refreshment-kicker">Debe</span>
+                <strong>Dani</strong>
+                <small>Semana 2 - 18-25 junio 2026 (hasta 10:00)</small>
+              </div>
+              <div class="refreshment-count">
+                <b>4</b>
+                <span>refrescos</span>
+              </div>
+              <div class="creditor-chips">
+                <span>Carlos</span><span>Alberto Erhardt</span><span>Serena &amp; Andrea</span><span>Gonzalo Carrero</span>
+              </div>
+            </article>
+          
+            <article class="refreshment-card ">
+              <div>
+                <span class="refreshment-kicker">Debe</span>
+                <strong>Jose</strong>
+                <small>Semana 1 - 15-18 junio 2026</small>
+              </div>
+              <div class="refreshment-count">
+                <b>4</b>
+                <span>refrescos</span>
+              </div>
+              <div class="creditor-chips">
+                <span>Gonzalo Carrero</span><span>Alberto Erhardt</span><span>Serena &amp; Andrea</span><span>Carlos</span>
+              </div>
+            </article>
+          
+        </div>
+        <table class="refreshment-ledger">
+          <thead>
+            <tr>
+              <th>Jornada</th>
+              <th>Deudor</th>
+              <th></th>
+              <th>Acreedor</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              <tr class="">
+                <td>Semana 1 - 15-18 junio 2026</td>
+                <td><strong>Jose</strong></td>
+                <td class="debt-arrow">&rarr;</td>
+                <td>Gonzalo Carrero</td>
+                <td><span class="debt-status pending">Pendiente</span></td>
+              </tr>
+            
+              <tr class="">
+                <td>Semana 1 - 15-18 junio 2026</td>
+                <td><strong>Jose</strong></td>
+                <td class="debt-arrow">&rarr;</td>
+                <td>Alberto Erhardt</td>
+                <td><span class="debt-status pending">Pendiente</span></td>
+              </tr>
+            
+              <tr class="">
+                <td>Semana 1 - 15-18 junio 2026</td>
+                <td><strong>Jose</strong></td>
+                <td class="debt-arrow">&rarr;</td>
+                <td>Serena &amp; Andrea</td>
+                <td><span class="debt-status pending">Pendiente</span></td>
+              </tr>
+            
+              <tr class="">
+                <td>Semana 1 - 15-18 junio 2026</td>
+                <td><strong>Jose</strong></td>
+                <td class="debt-arrow">&rarr;</td>
+                <td>Carlos</td>
+                <td><span class="debt-status pending">Pendiente</span></td>
+              </tr>
+            
+              <tr class="">
+                <td>Semana 2 - 18-25 junio 2026 (hasta 10:00)</td>
+                <td><strong>Dani</strong></td>
+                <td class="debt-arrow">&rarr;</td>
+                <td>Carlos</td>
+                <td><span class="debt-status pending">Pendiente</span></td>
+              </tr>
+            
+              <tr class="">
+                <td>Semana 2 - 18-25 junio 2026 (hasta 10:00)</td>
+                <td><strong>Dani</strong></td>
+                <td class="debt-arrow">&rarr;</td>
+                <td>Alberto Erhardt</td>
+                <td><span class="debt-status pending">Pendiente</span></td>
+              </tr>
+            
+              <tr class="">
+                <td>Semana 2 - 18-25 junio 2026 (hasta 10:00)</td>
+                <td><strong>Dani</strong></td>
+                <td class="debt-arrow">&rarr;</td>
+                <td>Serena &amp; Andrea</td>
+                <td><span class="debt-status pending">Pendiente</span></td>
+              </tr>
+            
+              <tr class="">
+                <td>Semana 2 - 18-25 junio 2026 (hasta 10:00)</td>
+                <td><strong>Dani</strong></td>
+                <td class="debt-arrow">&rarr;</td>
+                <td>Gonzalo Carrero</td>
+                <td><span class="debt-status pending">Pendiente</span></td>
+              </tr>
+            
+          </tbody>
+        </table>
       </div>
     </section>
   
