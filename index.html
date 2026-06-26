@@ -130,6 +130,9 @@
       .match-card header { display: grid; }
       .result-pill { justify-self: start; }
     }
+    .dot.pending { background: var(--gold); }
+    .pick-detail { display: block; margin-top: 4px; color: #5f6b7a; font-size: .78rem; line-height: 1.35; }
+    .pick-detail strong { color: var(--ink); }
   </style>
 </head>
 <body>
@@ -249,6 +252,7 @@
         <span><i class="dot diff"></i>Ganador + diferencia</span>
         <span><i class="dot sign"></i>Solo ganador</span>
         <span><i class="dot miss"></i>Ganador fallado</span>
+        <span><i class="dot pending"></i>Dieciseisavos: x1, x1/2 o x1/3 segun equipos</span>
       </div>
       
       <div class="match-grid">
