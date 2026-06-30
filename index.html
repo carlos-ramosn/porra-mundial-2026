@@ -127,17 +127,19 @@
     .match-card td:nth-child(2), .match-card td:nth-child(3), .match-card td:nth-child(4) { text-align: right; font-weight: 950; white-space: normal; overflow-wrap: anywhere; }
     .match-card td:nth-child(2) { min-width: 140px; }
     .match-card td:nth-child(3) { min-width: 112px; }
-    .pick-cell { display: grid; justify-items: end; gap: 5px; }
-    .pick-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 7px; max-width: 240px; }
-    .route-chip { display: inline-flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-end; gap: 1px 5px; max-width: 220px; padding: 0; color: #647184; font-size: .68rem; line-height: 1.18; text-align: right; }
-    .route-chip b, .route-chip em { font: 950 .65rem var(--display); letter-spacing: .02em; text-transform: uppercase; }
-    .route-chip em { color: #7a8493; font-style: normal; }
-    .route-chip span { flex-basis: 100%; color: #7a8493; font-weight: 800; overflow-wrap: anywhere; }
+    .pick-cell { display: grid; justify-items: end; gap: 4px; min-width: 0; }
+    .pick-meta { display: flex; align-items: center; justify-content: flex-end; gap: 5px; max-width: 100%; min-width: 0; flex-wrap: nowrap; }
+    .route-chip { display: inline-flex; align-items: center; justify-content: flex-end; gap: 4px; max-width: 100%; min-width: 0; padding: 0; color: #667386; font: 950 .68rem/1 var(--display); letter-spacing: .02em; text-align: right; text-transform: uppercase; white-space: nowrap; }
+    .route-chip::before { content: ""; width: 4px; height: 4px; flex: 0 0 4px; border-radius: 999px; background: currentColor; opacity: .9; }
+    .route-chip b, .route-chip em { flex: 0 0 auto; font: inherit; }
+    .route-chip em { color: #8a93a1; font-style: normal; }
+    .route-chip b + em::before, .route-chip em + span::before, .route-chip b + span::before { content: "·"; margin-right: 4px; color: #a0a8b4; }
+    .route-chip span { min-width: 0; overflow: hidden; color: #7b8594; font: 950 .66rem/1 var(--display); letter-spacing: .02em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
     .route-exact b { color: #00885c; }
     .route-partial b { color: #8a6900; }
     .route-miss b { color: #c0183a; }
     .route-pending b { color: #647184; }
-    .tiebreak-chip { display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 7px; color: #061226; background: #fff; border: 1px solid rgba(8,18,37,.14); font: 950 .66rem var(--display); text-transform: uppercase; }
+    .tiebreak-chip { display: inline-flex; align-items: center; flex: 0 0 auto; border-radius: 4px; padding: 2px 4px; color: #061226; background: #fff; border: 1px solid rgba(8,18,37,.14); font: 950 .58rem/1 var(--display); letter-spacing: .02em; text-transform: uppercase; white-space: nowrap; }
     .tiebreak-ok { background: #dff8e9; color: #053621; border-color: rgba(0,183,120,.34); }
     .tiebreak-miss { background: #ffd6de; color: #5e0618; border-color: rgba(255,49,88,.34); }
     .pick-pending { background: #fff; }
@@ -280,7 +282,7 @@
         <span><i class="dot sign"></i>Solo ganador</span>
         <span><i class="dot miss"></i>Ganador fallado</span>
         <span><i class="dot shootout"></i>Recuadro dorado = ganador de tanda</span>
-        <span><i class="dot pending"></i>Dieciseisavos: x1, x1/2 o x1/3 segun equipos</span>
+        <span><i class="dot pending"></i>Dieciseisavos: 2/2, 1/2 o 0/2 segun equipos</span>
       </div>
       
       <div class="match-grid">
@@ -2391,9 +2393,8 @@
     <span class="score-num ">2</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Sudafrica vs Canada</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador</td>
@@ -2409,9 +2410,8 @@
     <span class="score-num ">2</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Sudafrica vs Canada</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador</td>
@@ -2427,9 +2427,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Sudafrica vs Canada</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Fallado</td>
@@ -2445,9 +2444,8 @@
     <span class="score-num ">2</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Sudafrica vs Canada</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador + dif.</td>
@@ -2463,9 +2461,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Sudafrica vs Canada</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Exacto</td>
@@ -2481,9 +2478,8 @@
     <span class="score-num ">3</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Sudafrica vs Canada</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador</td>
@@ -2499,9 +2495,8 @@
     <span class="score-num ">3</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Sudafrica vs Canada</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador</td>
@@ -2536,9 +2531,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Brasil vs Japon</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador + dif.</td>
@@ -2554,9 +2548,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Brasil vs Japon</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador</td>
@@ -2572,9 +2565,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Brasil vs Japon</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador</td>
@@ -2590,9 +2582,8 @@
     <span class="score-num ">3</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Brasil vs Japon</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Fallado</td>
@@ -2608,9 +2599,8 @@
     <span class="score-num ">2</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Brasil vs Japon</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador</td>
@@ -2626,9 +2616,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Brasil vs Japon</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador</td>
@@ -2644,9 +2633,8 @@
     <span class="score-num ">2</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Brasil vs Japon</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador + dif.</td>
@@ -2681,9 +2669,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Alemania vs Paraguay">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Alemania vs Paraguay</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Fallado</td>
@@ -2699,9 +2686,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Alemania vs Paraguay">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Alemania vs Paraguay</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Fallado</td>
@@ -2717,9 +2703,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-partial" title="Cruce de su porra: Alemania vs Suecia">
-    <b>Cruce 1/2</b>
-    <em>x1/2</em>
-    <span>Alemania vs Suecia</span>
+    <b>1/2</b>
+    <span>GER-SWE</span>
   </span></div>
   </div></td>
                         <td>Fallado</td>
@@ -2735,9 +2720,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Alemania vs Paraguay">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Alemania vs Paraguay</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Fallado</td>
@@ -2753,9 +2737,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-partial" title="Cruce de su porra: Alemania vs Suecia">
-    <b>Cruce 1/2</b>
-    <em>x1/2</em>
-    <span>Alemania vs Suecia</span>
+    <b>1/2</b>
+    <span>GER-SWE</span>
   </span></div>
   </div></td>
                         <td>Fallado</td>
@@ -2771,9 +2754,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Alemania vs Paraguay">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Alemania vs Paraguay</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Fallado</td>
@@ -2789,9 +2771,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Alemania vs Paraguay">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Alemania vs Paraguay</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Fallado</td>
@@ -2825,10 +2806,9 @@
     <span class="score-sep">-</span>
     <span class="score-num penalty-winner">1</span>
   </span>
-    <div class="pick-meta"><span class="tiebreak-chip tiebreak-ok">Tanda OK</span><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Paises Bajos vs Marruecos</span>
+    <div class="pick-meta"><span class="tiebreak-chip tiebreak-ok">PEN OK</span><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Exacto</td>
@@ -2843,10 +2823,9 @@
     <span class="score-sep">-</span>
     <span class="score-num penalty-winner">1</span>
   </span>
-    <div class="pick-meta"><span class="tiebreak-chip tiebreak-ok">Tanda OK</span><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Paises Bajos vs Marruecos</span>
+    <div class="pick-meta"><span class="tiebreak-chip tiebreak-ok">PEN OK</span><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Exacto</td>
@@ -2862,9 +2841,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Paises Bajos vs Marruecos</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Fallado</td>
@@ -2880,9 +2858,8 @@
     <span class="score-num ">3</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Paises Bajos vs Marruecos</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador</td>
@@ -2898,9 +2875,8 @@
     <span class="score-num ">2</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Paises Bajos vs Marruecos</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador</td>
@@ -2916,9 +2892,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Paises Bajos vs Marruecos</span>
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Fallado</td>
@@ -2933,10 +2908,9 @@
     <span class="score-sep">-</span>
     <span class="score-num penalty-winner">2</span>
   </span>
-    <div class="pick-meta"><span class="tiebreak-chip tiebreak-ok">Tanda OK</span><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
-    <b>Cruce 2/2</b>
-    <em>x1</em>
-    <span>Paises Bajos vs Marruecos</span>
+    <div class="pick-meta"><span class="tiebreak-chip tiebreak-ok">PEN OK</span><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
+    <b>2/2</b>
+    
   </span></div>
   </div></td>
                         <td>Ganador + dif.</td>
@@ -2967,8 +2941,8 @@
     <span class="score-num ">2</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Costa de Marfil vs Noruega">
-      <b>Previsto</b>
-      <span>Costa de Marfil vs Noruega</span>
+      <b>Prev.</b>
+      <span>CIV-NOR</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -2984,8 +2958,8 @@
     <span class="score-num ">3</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Costa de Marfil vs Noruega">
-      <b>Previsto</b>
-      <span>Costa de Marfil vs Noruega</span>
+      <b>Prev.</b>
+      <span>CIV-NOR</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3001,8 +2975,8 @@
     <span class="score-num ">3</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Costa de Marfil vs Noruega">
-      <b>Previsto</b>
-      <span>Costa de Marfil vs Noruega</span>
+      <b>Prev.</b>
+      <span>CIV-NOR</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3018,8 +2992,8 @@
     <span class="score-num ">3</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Costa de Marfil vs Noruega">
-      <b>Previsto</b>
-      <span>Costa de Marfil vs Noruega</span>
+      <b>Prev.</b>
+      <span>CIV-NOR</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3035,8 +3009,8 @@
     <span class="score-num ">2</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Curazao vs Noruega">
-      <b>Previsto</b>
-      <span>Curazao vs Noruega</span>
+      <b>Prev.</b>
+      <span>CUW-NOR</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3052,8 +3026,8 @@
     <span class="score-num ">3</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Costa de Marfil vs Noruega">
-      <b>Previsto</b>
-      <span>Costa de Marfil vs Noruega</span>
+      <b>Prev.</b>
+      <span>CIV-NOR</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3069,8 +3043,8 @@
     <span class="score-num ">3</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Costa de Marfil vs Francia">
-      <b>Previsto</b>
-      <span>Costa de Marfil vs Francia</span>
+      <b>Prev.</b>
+      <span>CIV-FRA</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3101,8 +3075,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Francia vs Suecia">
-      <b>Previsto</b>
-      <span>Francia vs Suecia</span>
+      <b>Prev.</b>
+      <span>FRA-SWE</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3118,8 +3092,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Francia vs Suecia">
-      <b>Previsto</b>
-      <span>Francia vs Suecia</span>
+      <b>Prev.</b>
+      <span>FRA-SWE</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3135,8 +3109,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Francia vs Irán">
-      <b>Previsto</b>
-      <span>Francia vs Irán</span>
+      <b>Prev.</b>
+      <span>FRA-IRN</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3152,8 +3126,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Francia vs Irán">
-      <b>Previsto</b>
-      <span>Francia vs Irán</span>
+      <b>Prev.</b>
+      <span>FRA-IRN</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3169,8 +3143,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Francia vs España">
-      <b>Previsto</b>
-      <span>Francia vs España</span>
+      <b>Prev.</b>
+      <span>FRA-ESP</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3186,8 +3160,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Francia vs Suecia">
-      <b>Previsto</b>
-      <span>Francia vs Suecia</span>
+      <b>Prev.</b>
+      <span>FRA-SWE</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3203,8 +3177,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Noruega vs Suecia">
-      <b>Previsto</b>
-      <span>Noruega vs Suecia</span>
+      <b>Prev.</b>
+      <span>NOR-SWE</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3235,8 +3209,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Mexico vs Senegal">
-      <b>Previsto</b>
-      <span>Mexico vs Senegal</span>
+      <b>Prev.</b>
+      <span>MEX-SEN</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3252,8 +3226,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Mexico vs Senegal">
-      <b>Previsto</b>
-      <span>Mexico vs Senegal</span>
+      <b>Prev.</b>
+      <span>MEX-SEN</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3269,8 +3243,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Mexico vs Senegal">
-      <b>Previsto</b>
-      <span>Mexico vs Senegal</span>
+      <b>Prev.</b>
+      <span>MEX-SEN</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3286,8 +3260,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Mexico vs Suecia">
-      <b>Previsto</b>
-      <span>Mexico vs Suecia</span>
+      <b>Prev.</b>
+      <span>MEX-SWE</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3303,8 +3277,8 @@
     <span class="score-num ">2</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Mexico vs Costa de Marfil">
-      <b>Previsto</b>
-      <span>Mexico vs Costa de Marfil</span>
+      <b>Prev.</b>
+      <span>MEX-CIV</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3320,8 +3294,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Mexico vs Ecuador">
-      <b>Previsto</b>
-      <span>Mexico vs Ecuador</span>
+      <b>Prev.</b>
+      <span>MEX-ECU</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3337,8 +3311,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Mexico vs Senegal">
-      <b>Previsto</b>
-      <span>Mexico vs Senegal</span>
+      <b>Prev.</b>
+      <span>MEX-SEN</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3369,8 +3343,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Inglaterra vs RD Congo">
-      <b>Previsto</b>
-      <span>Inglaterra vs RD Congo</span>
+      <b>Prev.</b>
+      <span>ENG-COD</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3386,8 +3360,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Inglaterra vs RD Congo">
-      <b>Previsto</b>
-      <span>Inglaterra vs RD Congo</span>
+      <b>Prev.</b>
+      <span>ENG-COD</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3403,8 +3377,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Inglaterra vs RD Congo">
-      <b>Previsto</b>
-      <span>Inglaterra vs RD Congo</span>
+      <b>Prev.</b>
+      <span>ENG-COD</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3420,8 +3394,8 @@
     <span class="score-num ">2</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Inglaterra vs Senegal">
-      <b>Previsto</b>
-      <span>Inglaterra vs Senegal</span>
+      <b>Prev.</b>
+      <span>ENG-SEN</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3437,8 +3411,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Inglaterra vs RD Congo">
-      <b>Previsto</b>
-      <span>Inglaterra vs RD Congo</span>
+      <b>Prev.</b>
+      <span>ENG-COD</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3454,8 +3428,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Inglaterra vs Senegal">
-      <b>Previsto</b>
-      <span>Inglaterra vs Senegal</span>
+      <b>Prev.</b>
+      <span>ENG-SEN</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3471,8 +3445,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Inglaterra vs RD Congo">
-      <b>Previsto</b>
-      <span>Inglaterra vs RD Congo</span>
+      <b>Prev.</b>
+      <span>ENG-COD</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3503,8 +3477,8 @@
     <span class="score-num penalty-winner">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Egipto vs Corea del Sur">
-      <b>Previsto</b>
-      <span>Egipto vs Corea del Sur</span>
+      <b>Prev.</b>
+      <span>EGY-KOR</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3520,8 +3494,8 @@
     <span class="score-num penalty-winner">2</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Egipto vs Corea del Sur">
-      <b>Previsto</b>
-      <span>Egipto vs Corea del Sur</span>
+      <b>Prev.</b>
+      <span>EGY-KOR</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3537,8 +3511,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Bélgica vs Corea del Sur">
-      <b>Previsto</b>
-      <span>Bélgica vs Corea del Sur</span>
+      <b>Prev.</b>
+      <span>BEL-KOR</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3554,8 +3528,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Egipto vs Corea del Sur">
-      <b>Previsto</b>
-      <span>Egipto vs Corea del Sur</span>
+      <b>Prev.</b>
+      <span>EGY-KOR</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3571,8 +3545,8 @@
     <span class="score-num ">2</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Egipto vs Senegal">
-      <b>Previsto</b>
-      <span>Egipto vs Senegal</span>
+      <b>Prev.</b>
+      <span>EGY-SEN</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3588,8 +3562,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Bélgica vs Corea del Sur">
-      <b>Previsto</b>
-      <span>Bélgica vs Corea del Sur</span>
+      <b>Prev.</b>
+      <span>BEL-KOR</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3605,8 +3579,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Egipto vs Corea del Sur">
-      <b>Previsto</b>
-      <span>Egipto vs Corea del Sur</span>
+      <b>Prev.</b>
+      <span>EGY-KOR</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3637,8 +3611,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Estados Unidos vs Bosnia y Herzegovina">
-      <b>Previsto</b>
-      <span>Estados Unidos vs Bosnia y Herzegovina</span>
+      <b>Prev.</b>
+      <span>USA-BIH</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3654,8 +3628,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Estados Unidos vs Bosnia y Herzegovina">
-      <b>Previsto</b>
-      <span>Estados Unidos vs Bosnia y Herzegovina</span>
+      <b>Prev.</b>
+      <span>USA-BIH</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3671,8 +3645,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Estados Unidos vs Bosnia y Herzegovina">
-      <b>Previsto</b>
-      <span>Estados Unidos vs Bosnia y Herzegovina</span>
+      <b>Prev.</b>
+      <span>USA-BIH</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3688,8 +3662,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Estados Unidos vs Bosnia y Herzegovina">
-      <b>Previsto</b>
-      <span>Estados Unidos vs Bosnia y Herzegovina</span>
+      <b>Prev.</b>
+      <span>USA-BIH</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3705,8 +3679,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Estados Unidos vs Bosnia y Herzegovina">
-      <b>Previsto</b>
-      <span>Estados Unidos vs Bosnia y Herzegovina</span>
+      <b>Prev.</b>
+      <span>USA-BIH</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3722,8 +3696,8 @@
     <span class="score-num ">1</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Estados Unidos vs Bosnia y Herzegovina">
-      <b>Previsto</b>
-      <span>Estados Unidos vs Bosnia y Herzegovina</span>
+      <b>Prev.</b>
+      <span>USA-BIH</span>
     </span></div>
   </div></td>
                         <td></td>
@@ -3739,8 +3713,8 @@
     <span class="score-num ">0</span>
   </span>
     <div class="pick-meta"><span class="route-chip route-pending" title="Cruce previsto por su porra: Estados Unidos vs Bosnia y Herzegovina">
-      <b>Previsto</b>
-      <span>Estados Unidos vs Bosnia y Herzegovina</span>
+      <b>Prev.</b>
+      <span>USA-BIH</span>
     </span></div>
   </div></td>
                         <td></td>

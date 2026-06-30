@@ -127,17 +127,19 @@
     .match-card td:nth-child(2), .match-card td:nth-child(3), .match-card td:nth-child(4) { text-align: right; font-weight: 950; white-space: normal; overflow-wrap: anywhere; }
     .match-card td:nth-child(2) { min-width: 140px; }
     .match-card td:nth-child(3) { min-width: 112px; }
-    .pick-cell { display: grid; justify-items: end; gap: 5px; }
-    .pick-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 7px; max-width: 240px; }
-    .route-chip { display: inline-flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-end; gap: 1px 5px; max-width: 220px; padding: 0; color: #647184; font-size: .68rem; line-height: 1.18; text-align: right; }
-    .route-chip b, .route-chip em { font: 950 .65rem var(--display); letter-spacing: .02em; text-transform: uppercase; }
-    .route-chip em { color: #7a8493; font-style: normal; }
-    .route-chip span { flex-basis: 100%; color: #7a8493; font-weight: 800; overflow-wrap: anywhere; }
+    .pick-cell { display: grid; justify-items: end; gap: 4px; min-width: 0; }
+    .pick-meta { display: flex; align-items: center; justify-content: flex-end; gap: 5px; max-width: 100%; min-width: 0; flex-wrap: nowrap; }
+    .route-chip { display: inline-flex; align-items: center; justify-content: flex-end; gap: 4px; max-width: 100%; min-width: 0; padding: 0; color: #667386; font: 950 .68rem/1 var(--display); letter-spacing: .02em; text-align: right; text-transform: uppercase; white-space: nowrap; }
+    .route-chip::before { content: ""; width: 4px; height: 4px; flex: 0 0 4px; border-radius: 999px; background: currentColor; opacity: .9; }
+    .route-chip b, .route-chip em { flex: 0 0 auto; font: inherit; }
+    .route-chip em { color: #8a93a1; font-style: normal; }
+    .route-chip b + em::before, .route-chip em + span::before, .route-chip b + span::before { content: "·"; margin-right: 4px; color: #a0a8b4; }
+    .route-chip span { min-width: 0; overflow: hidden; color: #7b8594; font: 950 .66rem/1 var(--display); letter-spacing: .02em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
     .route-exact b { color: #00885c; }
     .route-partial b { color: #8a6900; }
     .route-miss b { color: #c0183a; }
     .route-pending b { color: #647184; }
-    .tiebreak-chip { display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 7px; color: #061226; background: #fff; border: 1px solid rgba(8,18,37,.14); font: 950 .66rem var(--display); text-transform: uppercase; }
+    .tiebreak-chip { display: inline-flex; align-items: center; flex: 0 0 auto; border-radius: 4px; padding: 2px 4px; color: #061226; background: #fff; border: 1px solid rgba(8,18,37,.14); font: 950 .58rem/1 var(--display); letter-spacing: .02em; text-transform: uppercase; white-space: nowrap; }
     .tiebreak-ok { background: #dff8e9; color: #053621; border-color: rgba(0,183,120,.34); }
     .tiebreak-miss { background: #ffd6de; color: #5e0618; border-color: rgba(255,49,88,.34); }
     .pick-pending { background: #fff; }
