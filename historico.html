@@ -128,14 +128,15 @@
     .match-card td:nth-child(2) { min-width: 140px; }
     .match-card td:nth-child(3) { min-width: 112px; }
     .pick-cell { display: grid; justify-items: end; gap: 5px; }
-    .pick-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 5px; max-width: 240px; }
-    .route-chip { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 3px 6px; max-width: 220px; border: 1px solid rgba(8,18,37,.16); border-radius: 8px; padding: 4px 6px; background: #fff; color: #061226; font-size: .68rem; line-height: 1.15; text-align: right; box-shadow: 0 4px 10px rgba(8,18,37,.06); }
-    .route-chip b, .route-chip em { font: 950 .66rem var(--display); text-transform: uppercase; }
-    .route-chip em { font-style: normal; }
-    .route-chip span { flex-basis: 100%; color: #536174; font-weight: 850; overflow-wrap: anywhere; }
-    .route-exact { border-color: rgba(0,183,120,.38); background: #eafff6; }
-    .route-partial { border-color: rgba(255,212,71,.7); background: #fff8d6; }
-    .route-miss { border-color: rgba(255,49,88,.35); background: #fff0f3; }
+    .pick-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 7px; max-width: 240px; }
+    .route-chip { display: inline-flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-end; gap: 1px 5px; max-width: 220px; padding: 0; color: #647184; font-size: .68rem; line-height: 1.18; text-align: right; }
+    .route-chip b, .route-chip em { font: 950 .65rem var(--display); letter-spacing: .02em; text-transform: uppercase; }
+    .route-chip em { color: #7a8493; font-style: normal; }
+    .route-chip span { flex-basis: 100%; color: #7a8493; font-weight: 800; overflow-wrap: anywhere; }
+    .route-exact b { color: #00885c; }
+    .route-partial b { color: #8a6900; }
+    .route-miss b { color: #c0183a; }
+    .route-pending b { color: #647184; }
     .tiebreak-chip { display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 7px; color: #061226; background: #fff; border: 1px solid rgba(8,18,37,.14); font: 950 .66rem var(--display); text-transform: uppercase; }
     .tiebreak-ok { background: #dff8e9; color: #053621; border-color: rgba(0,183,120,.34); }
     .tiebreak-miss { background: #ffd6de; color: #5e0618; border-color: rgba(255,49,88,.34); }
