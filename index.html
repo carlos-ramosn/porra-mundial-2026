@@ -107,16 +107,19 @@
     .dot.diff { background: #00b778; }
     .dot.sign { background: #ffd447; border: 1px solid rgba(8,18,37,.22); }
     .dot.miss { background: #ff3158; }
-    .match-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; padding: 12px; }
+    .match-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 12px; padding: 12px; }
     .match-card { border: 1px solid var(--line); border-radius: 8px; background: #fff; overflow: hidden; box-shadow: 0 10px 26px rgba(8,18,37,.1); }
-    .match-card header { display: flex; justify-content: space-between; gap: 10px; padding: 11px; background: #061226; color: #fff; border-left: 9px solid var(--red); }
+    .match-card header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 10px; padding: 11px; background: #061226; color: #fff; border-left: 9px solid var(--red); }
     .match-card.match-played header { border-left-color: var(--cyan); background: linear-gradient(95deg, #061226, #08336f); }
-    .match-card header strong { display: block; font-weight: 950; }
-    .match-card header span { color: rgba(255,255,255,.7); }
-    .result-pill { align-self: center; border-radius: 8px; padding: 7px 9px; color: #061226; background: var(--gold); font: 900 .85rem var(--display); white-space: nowrap; text-transform: uppercase; }
+    .match-card header strong { display: block; font-weight: 950; line-height: 1.16; overflow-wrap: anywhere; }
+    .match-card header span { color: rgba(255,255,255,.7); line-height: 1.25; overflow-wrap: anywhere; }
+    .result-pill { align-self: start; border-radius: 8px; padding: 7px 9px; color: #061226; background: var(--gold); font: 900 .85rem var(--display); white-space: nowrap; text-transform: uppercase; }
     .result-pill.played { color: #fff; background: var(--blue); box-shadow: 0 0 0 3px rgba(15,95,255,.22); }
     .match-card tr { transition: background .15s ease; }
-    .match-card td:nth-child(2), .match-card td:nth-child(3), .match-card td:nth-child(4) { text-align: right; font-weight: 950; white-space: nowrap; }
+    .match-card td { vertical-align: top; }
+    .match-card td:nth-child(2), .match-card td:nth-child(3), .match-card td:nth-child(4) { text-align: right; font-weight: 950; white-space: normal; overflow-wrap: anywhere; }
+    .match-card td:nth-child(2) { min-width: 96px; }
+    .match-card td:nth-child(3) { min-width: 112px; }
     .pick-pending { background: #fff; }
     .pick-exact { background: #d8e9ff; color: #082a63; }
     .pick-diff { background: #dff8e9; color: #053621; }
@@ -127,7 +130,7 @@
       .summary { grid-template-columns: 1fr; }
       .hero h1 { font-size: 1.9rem; }
       th, td { padding: 8px; }
-      .match-card header { display: grid; }
+      .match-card header { grid-template-columns: 1fr; }
       .result-pill { justify-self: start; }
     }
     .dot.pending { background: var(--gold); }
@@ -139,7 +142,7 @@
   <main class="wrap">
     <section class="hero">
       <h1>Porra Mundial 2026</h1>
-      <p>Semana 3 · Actualizado 30 jun 2026, 9:28 · Refrescos del dia de bocata en juego.</p>
+      <p>Semana 3 · Actualizado 30 jun 2026, 9:32 · Refrescos del dia de bocata en juego.</p>
       <nav class="nav">
         <a href="#clasificacion">Jornada</a><a href="#cuadro">Partidos actuales</a>
       </nav>
@@ -173,41 +176,41 @@
     <tr>
       <td><strong>1</strong></td>
       <td>Carlos</td>
-      <td class="points">31</td>
-      <td>4</td>
-      <td>6</td>
-      <td>13</td>
-      <td>20</td>
+      <td class="points">36</td>
+      <td>5</td>
+      <td>7</td>
+      <td>14</td>
+      <td>22</td>
     </tr>
   
     <tr>
       <td><strong>2</strong></td>
       <td>Alberto Erhardt</td>
-      <td class="points">25</td>
-      <td>1</td>
-      <td>7</td>
-      <td>15</td>
-      <td>20</td>
+      <td class="points">30</td>
+      <td>2</td>
+      <td>8</td>
+      <td>16</td>
+      <td>22</td>
     </tr>
   
     <tr>
       <td><strong>3</strong></td>
-      <td>Gonzalo Carrero</td>
-      <td class="points">20</td>
+      <td>Serena &amp; Andrea</td>
+      <td class="points">22</td>
       <td>1</td>
-      <td>5</td>
-      <td>12</td>
-      <td>20</td>
+      <td>6</td>
+      <td>13</td>
+      <td>22</td>
     </tr>
   
     <tr>
       <td><strong>4</strong></td>
-      <td>Serena &amp; Andrea</td>
-      <td class="points">20</td>
+      <td>Gonzalo Carrero</td>
+      <td class="points">21</td>
       <td>1</td>
       <td>5</td>
-      <td>12</td>
-      <td>20</td>
+      <td>13</td>
+      <td>22</td>
     </tr>
   
     <tr>
@@ -217,17 +220,17 @@
       <td>1</td>
       <td>3</td>
       <td>11</td>
-      <td>20</td>
+      <td>22</td>
     </tr>
   
     <tr>
       <td><strong>6</strong></td>
       <td>Gonzalo Becario</td>
-      <td class="points">15</td>
+      <td class="points">16</td>
       <td>1</td>
       <td>3</td>
-      <td>9</td>
-      <td>20</td>
+      <td>10</td>
+      <td>22</td>
     </tr>
   
     <tr>
@@ -237,7 +240,7 @@
       <td>1</td>
       <td>1</td>
       <td>10</td>
-      <td>20</td>
+      <td>22</td>
     </tr>
   
           </tbody>
@@ -1552,53 +1555,53 @@
               <table>
                 <tbody>
                   
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Alberto Erhardt</td>
                         <td>1-0<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Carlos</td>
                         <td>3-0<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Dani</td>
                         <td>3-0<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
                         <td>4-1<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Gonzalo Carrero</td>
                         <td>3-1<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Jose</td>
                         <td>2-0<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Serena &amp; Andrea</td>
                         <td>5-1<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>0</td>
                       </tr>
                     
                 </tbody>
@@ -1616,53 +1619,53 @@
               <table>
                 <tbody>
                   
-                      <tr class="pick-pending">
+                      <tr class="pick-exact">
                         <td>Alberto Erhardt</td>
                         <td>1-1<span class="pick-detail">Penaltis: Marruecos</span><span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Exacto<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>5</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-exact">
                         <td>Carlos</td>
                         <td>1-1<span class="pick-detail">Penaltis: Marruecos</span><span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Exacto<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>5</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Dani</td>
                         <td>2-1<span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Gonzalo Becario</td>
                         <td>2-3<span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-sign">
                         <td>Gonzalo Carrero</td>
                         <td>1-2<span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>1</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-miss">
                         <td>Jose</td>
                         <td>2-0<span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>0</td>
                       </tr>
                     
-                      <tr class="pick-pending">
+                      <tr class="pick-diff">
                         <td>Serena &amp; Andrea</td>
                         <td>2-2<span class="pick-detail">Penaltis: Marruecos</span><span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td></td>
-                        <td></td>
+                        <td>Ganador + dif.<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td>2</td>
                       </tr>
                     
                 </tbody>
