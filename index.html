@@ -113,7 +113,8 @@
     .match-card.match-played header { border-left-color: var(--cyan); background: linear-gradient(95deg, #061226, #08336f); }
     .match-card header strong { display: block; font-weight: 950; line-height: 1.16; overflow-wrap: anywhere; }
     .match-card header span { color: rgba(255,255,255,.7); line-height: 1.25; overflow-wrap: anywhere; }
-    .result-pill { align-self: start; border-radius: 8px; padding: 7px 9px; color: #061226; background: var(--gold); font: 900 .85rem var(--display); white-space: nowrap; text-transform: uppercase; }
+    .result-pill { align-self: start; display: inline-flex; flex-direction: column; gap: 2px; border-radius: 8px; padding: 7px 9px; color: #061226; background: var(--gold); font: 900 .85rem var(--display); white-space: normal; text-transform: uppercase; line-height: 1.15; max-width: 100%; overflow-wrap: anywhere; }
+    .result-pill span { color: inherit; opacity: .86; font-size: .72rem; line-height: 1.2; }
     .result-pill.played { color: #fff; background: var(--blue); box-shadow: 0 0 0 3px rgba(15,95,255,.22); }
     .match-card tr { transition: background .15s ease; }
     .match-card td { vertical-align: top; }
@@ -1550,7 +1551,7 @@
                   <strong>Alemania vs Paraguay</strong>
                   <span>2026-06-29 · 22:30 · Grupo R32</span>
                 </div>
-                <b class="result-pill played">Resultado 1-1</b>
+                <b class="result-pill played">Resultado 1-1<span>Penaltis: Paraguay</span></b>
               </header>
               <table>
                 <tbody>
@@ -1614,7 +1615,7 @@
                   <strong>Paises Bajos vs Marruecos</strong>
                   <span>2026-06-30 · 03:00 · Grupo R32</span>
                 </div>
-                <b class="result-pill played">Resultado 1-1</b>
+                <b class="result-pill played">Resultado 1-1<span>Penaltis: Marruecos</span></b>
               </header>
               <table>
                 <tbody>
