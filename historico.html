@@ -107,20 +107,38 @@
     .dot.diff { background: #00b778; }
     .dot.sign { background: #ffd447; border: 1px solid rgba(8,18,37,.22); }
     .dot.miss { background: #ff3158; }
+    .dot.shootout { border-radius: 3px; background: var(--gold); box-shadow: inset 0 0 0 2px #061226; }
     .match-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 12px; padding: 12px; }
     .match-card { border: 1px solid var(--line); border-radius: 8px; background: #fff; overflow: hidden; box-shadow: 0 10px 26px rgba(8,18,37,.1); }
     .match-card header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 10px; padding: 11px; background: #061226; color: #fff; border-left: 9px solid var(--red); }
     .match-card.match-played header { border-left-color: var(--cyan); background: linear-gradient(95deg, #061226, #08336f); }
     .match-card header strong { display: block; font-weight: 950; line-height: 1.16; overflow-wrap: anywhere; }
     .match-card header span { color: rgba(255,255,255,.7); line-height: 1.25; overflow-wrap: anywhere; }
-    .result-pill { align-self: start; display: inline-flex; flex-direction: column; gap: 2px; border-radius: 8px; padding: 7px 9px; color: #061226; background: var(--gold); font: 900 .85rem var(--display); white-space: normal; text-transform: uppercase; line-height: 1.15; max-width: 100%; overflow-wrap: anywhere; }
-    .result-pill span { color: inherit; opacity: .86; font-size: .72rem; line-height: 1.2; }
+    .scoreline { display: inline-flex; align-items: center; justify-content: flex-end; gap: 3px; font: 950 1rem/1 var(--display); white-space: nowrap; }
+    .score-num { min-width: 1.55em; padding: 2px 5px; border: 1px solid transparent; border-radius: 6px; text-align: center; }
+    .score-sep { opacity: .62; }
+    .score-num.penalty-winner { color: #061226; background: #fff6bf; border-color: var(--gold); box-shadow: 0 0 0 2px rgba(255,212,71,.45); }
+    .result-pill { align-self: start; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px; padding: 7px 9px; color: #061226; background: var(--gold); font: 900 .85rem var(--display); white-space: normal; text-transform: uppercase; line-height: 1.15; max-width: 100%; overflow-wrap: anywhere; }
+    .result-pill .scoreline { font-size: .96rem; }
+    .result-pill .score-num.penalty-winner { color: #061226; background: var(--gold); border-color: #fff; box-shadow: 0 0 0 2px rgba(255,255,255,.32); }
     .result-pill.played { color: #fff; background: var(--blue); box-shadow: 0 0 0 3px rgba(15,95,255,.22); }
     .match-card tr { transition: background .15s ease; }
     .match-card td { vertical-align: top; }
     .match-card td:nth-child(2), .match-card td:nth-child(3), .match-card td:nth-child(4) { text-align: right; font-weight: 950; white-space: normal; overflow-wrap: anywhere; }
-    .match-card td:nth-child(2) { min-width: 96px; }
+    .match-card td:nth-child(2) { min-width: 140px; }
     .match-card td:nth-child(3) { min-width: 112px; }
+    .pick-cell { display: grid; justify-items: end; gap: 5px; }
+    .pick-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 5px; max-width: 240px; }
+    .route-chip { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 3px 6px; max-width: 220px; border: 1px solid rgba(8,18,37,.16); border-radius: 8px; padding: 4px 6px; background: #fff; color: #061226; font-size: .68rem; line-height: 1.15; text-align: right; box-shadow: 0 4px 10px rgba(8,18,37,.06); }
+    .route-chip b, .route-chip em { font: 950 .66rem var(--display); text-transform: uppercase; }
+    .route-chip em { font-style: normal; }
+    .route-chip span { flex-basis: 100%; color: #536174; font-weight: 850; overflow-wrap: anywhere; }
+    .route-exact { border-color: rgba(0,183,120,.38); background: #eafff6; }
+    .route-partial { border-color: rgba(255,212,71,.7); background: #fff8d6; }
+    .route-miss { border-color: rgba(255,49,88,.35); background: #fff0f3; }
+    .tiebreak-chip { display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 7px; color: #061226; background: #fff; border: 1px solid rgba(8,18,37,.14); font: 950 .66rem var(--display); text-transform: uppercase; }
+    .tiebreak-ok { background: #dff8e9; color: #053621; border-color: rgba(0,183,120,.34); }
+    .tiebreak-miss { background: #ffd6de; color: #5e0618; border-color: rgba(255,49,88,.34); }
     .pick-pending { background: #fff; }
     .pick-exact { background: #d8e9ff; color: #082a63; }
     .pick-diff { background: #dff8e9; color: #053621; }

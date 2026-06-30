@@ -107,20 +107,38 @@
     .dot.diff { background: #00b778; }
     .dot.sign { background: #ffd447; border: 1px solid rgba(8,18,37,.22); }
     .dot.miss { background: #ff3158; }
+    .dot.shootout { border-radius: 3px; background: var(--gold); box-shadow: inset 0 0 0 2px #061226; }
     .match-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 12px; padding: 12px; }
     .match-card { border: 1px solid var(--line); border-radius: 8px; background: #fff; overflow: hidden; box-shadow: 0 10px 26px rgba(8,18,37,.1); }
     .match-card header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 10px; padding: 11px; background: #061226; color: #fff; border-left: 9px solid var(--red); }
     .match-card.match-played header { border-left-color: var(--cyan); background: linear-gradient(95deg, #061226, #08336f); }
     .match-card header strong { display: block; font-weight: 950; line-height: 1.16; overflow-wrap: anywhere; }
     .match-card header span { color: rgba(255,255,255,.7); line-height: 1.25; overflow-wrap: anywhere; }
-    .result-pill { align-self: start; display: inline-flex; flex-direction: column; gap: 2px; border-radius: 8px; padding: 7px 9px; color: #061226; background: var(--gold); font: 900 .85rem var(--display); white-space: normal; text-transform: uppercase; line-height: 1.15; max-width: 100%; overflow-wrap: anywhere; }
-    .result-pill span { color: inherit; opacity: .86; font-size: .72rem; line-height: 1.2; }
+    .scoreline { display: inline-flex; align-items: center; justify-content: flex-end; gap: 3px; font: 950 1rem/1 var(--display); white-space: nowrap; }
+    .score-num { min-width: 1.55em; padding: 2px 5px; border: 1px solid transparent; border-radius: 6px; text-align: center; }
+    .score-sep { opacity: .62; }
+    .score-num.penalty-winner { color: #061226; background: #fff6bf; border-color: var(--gold); box-shadow: 0 0 0 2px rgba(255,212,71,.45); }
+    .result-pill { align-self: start; display: inline-flex; align-items: center; gap: 6px; border-radius: 8px; padding: 7px 9px; color: #061226; background: var(--gold); font: 900 .85rem var(--display); white-space: normal; text-transform: uppercase; line-height: 1.15; max-width: 100%; overflow-wrap: anywhere; }
+    .result-pill .scoreline { font-size: .96rem; }
+    .result-pill .score-num.penalty-winner { color: #061226; background: var(--gold); border-color: #fff; box-shadow: 0 0 0 2px rgba(255,255,255,.32); }
     .result-pill.played { color: #fff; background: var(--blue); box-shadow: 0 0 0 3px rgba(15,95,255,.22); }
     .match-card tr { transition: background .15s ease; }
     .match-card td { vertical-align: top; }
     .match-card td:nth-child(2), .match-card td:nth-child(3), .match-card td:nth-child(4) { text-align: right; font-weight: 950; white-space: normal; overflow-wrap: anywhere; }
-    .match-card td:nth-child(2) { min-width: 96px; }
+    .match-card td:nth-child(2) { min-width: 140px; }
     .match-card td:nth-child(3) { min-width: 112px; }
+    .pick-cell { display: grid; justify-items: end; gap: 5px; }
+    .pick-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 5px; max-width: 240px; }
+    .route-chip { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 3px 6px; max-width: 220px; border: 1px solid rgba(8,18,37,.16); border-radius: 8px; padding: 4px 6px; background: #fff; color: #061226; font-size: .68rem; line-height: 1.15; text-align: right; box-shadow: 0 4px 10px rgba(8,18,37,.06); }
+    .route-chip b, .route-chip em { font: 950 .66rem var(--display); text-transform: uppercase; }
+    .route-chip em { font-style: normal; }
+    .route-chip span { flex-basis: 100%; color: #536174; font-weight: 850; overflow-wrap: anywhere; }
+    .route-exact { border-color: rgba(0,183,120,.38); background: #eafff6; }
+    .route-partial { border-color: rgba(255,212,71,.7); background: #fff8d6; }
+    .route-miss { border-color: rgba(255,49,88,.35); background: #fff0f3; }
+    .tiebreak-chip { display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 7px; color: #061226; background: #fff; border: 1px solid rgba(8,18,37,.14); font: 950 .66rem var(--display); text-transform: uppercase; }
+    .tiebreak-ok { background: #dff8e9; color: #053621; border-color: rgba(0,183,120,.34); }
+    .tiebreak-miss { background: #ffd6de; color: #5e0618; border-color: rgba(255,49,88,.34); }
     .pick-pending { background: #fff; }
     .pick-exact { background: #d8e9ff; color: #082a63; }
     .pick-diff { background: #dff8e9; color: #053621; }
@@ -260,6 +278,7 @@
         <span><i class="dot diff"></i>Ganador + diferencia</span>
         <span><i class="dot sign"></i>Solo ganador</span>
         <span><i class="dot miss"></i>Ganador fallado</span>
+        <span><i class="dot shootout"></i>Recuadro dorado = ganador de tanda</span>
         <span><i class="dot pending"></i>Dieciseisavos: x1, x1/2 o x1/3 segun equipos</span>
       </div>
       
@@ -271,56 +290,105 @@
                   <strong>Curazao vs Costa de Marfil</strong>
                   <span>2026-06-25 · 22:00 · Grupo E</span>
                 </div>
-                <b class="result-pill played">Resultado 0-2</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-sign">
                         <td>Alberto Erhardt</td>
-                        <td>1-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-exact">
                         <td>Carlos</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Exacto</td>
                         <td>5</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Dani</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
-                        <td>-</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline score-empty pick-score">-</span>
+    
+  </div></td>
                         <td>Fuera de plazo</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Carrero</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Jose</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fuera de plazo</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Serena &amp; Andrea</td>
-                        <td>0-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
@@ -335,56 +403,105 @@
                   <strong>Ecuador vs Alemania</strong>
                   <span>2026-06-25 · 22:00 · Grupo E</span>
                 </div>
-                <b class="result-pill played">Resultado 2-1</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-miss">
                         <td>Alberto Erhardt</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Carlos</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Dani</td>
-                        <td>0-4</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">4</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
-                        <td>-</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline score-empty pick-score">-</span>
+    
+  </div></td>
                         <td>Fuera de plazo</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Carrero</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Jose</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fuera de plazo</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Serena &amp; Andrea</td>
-                        <td>0-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
@@ -399,56 +516,105 @@
                   <strong>Japon vs Suecia</strong>
                   <span>2026-06-26 · 01:00 · Grupo F</span>
                 </div>
-                <b class="result-pill played">Resultado 1-1</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-miss">
                         <td>Alberto Erhardt</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-exact">
                         <td>Carlos</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Exacto</td>
                         <td>5</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Dani</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
-                        <td>-</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline score-empty pick-score">-</span>
+    
+  </div></td>
                         <td>Fuera de plazo</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Carrero</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Jose</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fuera de plazo</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Serena &amp; Andrea</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
@@ -463,56 +629,105 @@
                   <strong>Tunez vs Paises Bajos</strong>
                   <span>2026-06-26 · 01:00 · Grupo F</span>
                 </div>
-                <b class="result-pill played">Resultado 1-3</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-diff">
                         <td>Alberto Erhardt</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Carlos</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Dani</td>
-                        <td>0-5</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">5</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
-                        <td>-</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline score-empty pick-score">-</span>
+    
+  </div></td>
                         <td>Fuera de plazo</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Carrero</td>
-                        <td>0-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Jose</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Fuera de plazo</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Serena &amp; Andrea</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
@@ -527,56 +742,105 @@
                   <strong>Paraguay vs Australia</strong>
                   <span>2026-06-26 · 04:00 · Grupo D</span>
                 </div>
-                <b class="result-pill played">Resultado 0-0</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-diff">
                         <td>Alberto Erhardt</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Carlos</td>
-                        <td>0-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Dani</td>
-                        <td>1-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
-                        <td>-</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline score-empty pick-score">-</span>
+    
+  </div></td>
                         <td>Fuera de plazo</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Carrero</td>
-                        <td>1-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Jose</td>
-                        <td>0-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Fuera de plazo</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Serena &amp; Andrea</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
@@ -591,56 +855,105 @@
                   <strong>Turquia vs Estados Unidos</strong>
                   <span>2026-06-26 · 04:00 · Grupo D</span>
                 </div>
-                <b class="result-pill played">Resultado 3-2</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-miss">
                         <td>Alberto Erhardt</td>
-                        <td>0-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Carlos</td>
-                        <td>1-4</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">4</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Dani</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
-                        <td>-</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline score-empty pick-score">-</span>
+    
+  </div></td>
                         <td>Fuera de plazo</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Carrero</td>
-                        <td>3-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Jose</td>
-                        <td>3-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fuera de plazo</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Serena &amp; Andrea</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
@@ -655,56 +968,109 @@
                   <strong>Noruega vs Francia</strong>
                   <span>2026-06-26 · 21:00 · Grupo I</span>
                 </div>
-                <b class="result-pill played">Resultado 1-4</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">4</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-sign">
                         <td>Alberto Erhardt</td>
-                        <td>2-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-exact">
                         <td>Carlos</td>
-                        <td>1-4</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">4</span>
+  </span>
+    
+  </div></td>
                         <td>Exacto</td>
                         <td>5</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Dani</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Becario</td>
-                        <td>2-4</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">4</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Carrero</td>
-                        <td>2-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Jose</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Serena &amp; Andrea</td>
-                        <td>3-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
@@ -719,56 +1085,109 @@
                   <strong>Senegal vs Irak</strong>
                   <span>2026-06-26 · 21:00 · Grupo I</span>
                 </div>
-                <b class="result-pill played">Resultado 5-0</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">5</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-sign">
                         <td>Alberto Erhardt</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Carlos</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Dani</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Becario</td>
-                        <td>1-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Carrero</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Jose</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Serena &amp; Andrea</td>
-                        <td>1-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
@@ -783,56 +1202,109 @@
                   <strong>Cabo Verde vs Arabia Saudi</strong>
                   <span>2026-06-27 · 02:00 · Grupo H</span>
                 </div>
-                <b class="result-pill played">Resultado 0-0</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-diff">
                         <td>Alberto Erhardt</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Carlos</td>
-                        <td>3-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Dani</td>
-                        <td>1-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Carrero</td>
-                        <td>1-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Jose</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Serena &amp; Andrea</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
@@ -847,56 +1319,109 @@
                   <strong>Uruguay vs Espana</strong>
                   <span>2026-06-27 · 02:00 · Grupo H</span>
                 </div>
-                <b class="result-pill played">Resultado 0-1</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-sign">
                         <td>Alberto Erhardt</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Carlos</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Dani</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Becario</td>
-                        <td>1-4</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">4</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Carrero</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Jose</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Serena &amp; Andrea</td>
-                        <td>1-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
@@ -911,56 +1436,109 @@
                   <strong>Egipto vs Iran</strong>
                   <span>2026-06-27 · 05:00 · Grupo G</span>
                 </div>
-                <b class="result-pill played">Resultado 1-1</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-miss">
                         <td>Alberto Erhardt</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Carlos</td>
-                        <td>1-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-exact">
                         <td>Dani</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Exacto</td>
                         <td>5</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Gonzalo Becario</td>
-                        <td>0-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Carrero</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-exact">
                         <td>Jose</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Exacto</td>
                         <td>5</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Serena &amp; Andrea</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
@@ -975,56 +1553,109 @@
                   <strong>Nueva Zelanda vs Belgica</strong>
                   <span>2026-06-27 · 05:00 · Grupo G</span>
                 </div>
-                <b class="result-pill played">Resultado 1-5</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">5</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-sign">
                         <td>Alberto Erhardt</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Carlos</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Dani</td>
-                        <td>0-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Becario</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Carrero</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Jose</td>
-                        <td>0-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Serena &amp; Andrea</td>
-                        <td>1-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
@@ -1039,56 +1670,109 @@
                   <strong>Croacia vs Ghana</strong>
                   <span>2026-06-27 · 23:00 · Grupo L</span>
                 </div>
-                <b class="result-pill played">Resultado 2-1</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-miss">
                         <td>Alberto Erhardt</td>
-                        <td>2-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Carlos</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Dani</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-exact">
                         <td>Gonzalo Becario</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Exacto</td>
                         <td>5</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Gonzalo Carrero</td>
-                        <td>1-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Jose</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-exact">
                         <td>Serena &amp; Andrea</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Exacto</td>
                         <td>5</td>
                       </tr>
@@ -1103,56 +1787,109 @@
                   <strong>Panama vs Inglaterra</strong>
                   <span>2026-06-27 · 23:00 · Grupo L</span>
                 </div>
-                <b class="result-pill played">Resultado 0-2</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-exact">
                         <td>Alberto Erhardt</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Exacto</td>
                         <td>5</td>
                       </tr>
                     
                       <tr class="pick-exact">
                         <td>Carlos</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Exacto</td>
                         <td>5</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Dani</td>
-                        <td>0-4</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">4</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Becario</td>
-                        <td>0-4</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">4</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Gonzalo Carrero</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Jose</td>
-                        <td>0-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Serena &amp; Andrea</td>
-                        <td>0-5</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">5</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
@@ -1167,56 +1904,109 @@
                   <strong>Colombia vs Portugal</strong>
                   <span>2026-06-28 · 01:30 · Grupo K</span>
                 </div>
-                <b class="result-pill played">Resultado 0-0</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-diff">
                         <td>Alberto Erhardt</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Carlos</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Dani</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
-                        <td>2-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Carrero</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Jose</td>
-                        <td>1-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Serena &amp; Andrea</td>
-                        <td>2-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
@@ -1231,56 +2021,109 @@
                   <strong>RD Congo vs Uzbekistan</strong>
                   <span>2026-06-28 · 01:30 · Grupo K</span>
                 </div>
-                <b class="result-pill played">Resultado 3-1</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-sign">
                         <td>Alberto Erhardt</td>
-                        <td>1-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Carlos</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Dani</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
-                        <td>2-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Gonzalo Carrero</td>
-                        <td>2-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Jose</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Serena &amp; Andrea</td>
-                        <td>1-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
@@ -1295,56 +2138,109 @@
                   <strong>Argelia vs Austria</strong>
                   <span>2026-06-28 · 04:00 · Grupo J</span>
                 </div>
-                <b class="result-pill played">Resultado 3-3</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-diff">
                         <td>Alberto Erhardt</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Carlos</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Dani</td>
-                        <td>1-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
-                        <td>1-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Gonzalo Carrero</td>
-                        <td>1-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Jose</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Serena &amp; Andrea</td>
-                        <td>2-1</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
@@ -1359,56 +2255,109 @@
                   <strong>Jordania vs Argentina</strong>
                   <span>2026-06-28 · 04:00 · Grupo J</span>
                 </div>
-                <b class="result-pill played">Resultado 1-3</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-sign">
                         <td>Alberto Erhardt</td>
-                        <td>0-4</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">4</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Carlos</td>
-                        <td>0-2</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Dani</td>
-                        <td>4-0</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">4</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    
+  </div></td>
                         <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Becario</td>
-                        <td>0-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Carrero</td>
-                        <td>0-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Jose</td>
-                        <td>0-3</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Serena &amp; Andrea</td>
-                        <td>1-4</td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">4</span>
+  </span>
+    
+  </div></td>
                         <td>Ganador</td>
                         <td>1</td>
                       </tr>
@@ -1423,57 +2372,138 @@
                   <strong>Sudafrica vs Canada</strong>
                   <span>2026-06-28 · 21:00 · Grupo R32</span>
                 </div>
-                <b class="result-pill played">Resultado 0-1</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-sign">
                         <td>Alberto Erhardt</td>
-                        <td>0-2<span class="pick-detail">Cruce de su porra: <strong>Sudafrica vs Canada</strong></span></td>
-                        <td>Ganador<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Sudafrica vs Canada</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Carlos</td>
-                        <td>0-2<span class="pick-detail">Cruce de su porra: <strong>Sudafrica vs Canada</strong></span></td>
-                        <td>Ganador<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Sudafrica vs Canada</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Dani</td>
-                        <td>2-1<span class="pick-detail">Cruce de su porra: <strong>Sudafrica vs Canada</strong></span></td>
-                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Sudafrica vs Canada</span>
+  </span></div>
+  </div></td>
+                        <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Gonzalo Becario</td>
-                        <td>1-2<span class="pick-detail">Cruce de su porra: <strong>Sudafrica vs Canada</strong></span></td>
-                        <td>Ganador + dif.<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Sudafrica vs Canada</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-exact">
                         <td>Gonzalo Carrero</td>
-                        <td>0-1<span class="pick-detail">Cruce de su porra: <strong>Sudafrica vs Canada</strong></span></td>
-                        <td>Exacto<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Sudafrica vs Canada</span>
+  </span></div>
+  </div></td>
+                        <td>Exacto</td>
                         <td>5</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Jose</td>
-                        <td>0-3<span class="pick-detail">Cruce de su porra: <strong>Sudafrica vs Canada</strong></span></td>
-                        <td>Ganador<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Sudafrica vs Canada</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Serena &amp; Andrea</td>
-                        <td>1-3<span class="pick-detail">Cruce de su porra: <strong>Sudafrica vs Canada</strong></span></td>
-                        <td>Ganador<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Sudafrica vs Canada">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Sudafrica vs Canada</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
@@ -1487,57 +2517,138 @@
                   <strong>Brasil vs Japon</strong>
                   <span>2026-06-29 · 19:00 · Grupo R32</span>
                 </div>
-                <b class="result-pill played">Resultado 2-1</b>
+                <b class="result-pill played">Resultado <span class="scoreline  result-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-diff">
                         <td>Alberto Erhardt</td>
-                        <td>1-0<span class="pick-detail">Cruce de su porra: <strong>Brasil vs Japon</strong></span></td>
-                        <td>Ganador + dif.<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Brasil vs Japon</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Carlos</td>
-                        <td>4-1<span class="pick-detail">Cruce de su porra: <strong>Brasil vs Japon</strong></span></td>
-                        <td>Ganador<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">4</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Brasil vs Japon</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Dani</td>
-                        <td>3-1<span class="pick-detail">Cruce de su porra: <strong>Brasil vs Japon</strong></span></td>
-                        <td>Ganador<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Brasil vs Japon</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
-                        <td>2-3<span class="pick-detail">Cruce de su porra: <strong>Brasil vs Japon</strong></span></td>
-                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Brasil vs Japon</span>
+  </span></div>
+  </div></td>
+                        <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Carrero</td>
-                        <td>4-2<span class="pick-detail">Cruce de su porra: <strong>Brasil vs Japon</strong></span></td>
-                        <td>Ganador<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">4</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Brasil vs Japon</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Jose</td>
-                        <td>3-1<span class="pick-detail">Cruce de su porra: <strong>Brasil vs Japon</strong></span></td>
-                        <td>Ganador<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Brasil vs Japon</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Serena &amp; Andrea</td>
-                        <td>3-2<span class="pick-detail">Cruce de su porra: <strong>Brasil vs Japon</strong></span></td>
-                        <td>Ganador + dif.<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Brasil vs Japon">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Brasil vs Japon</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
@@ -1551,57 +2662,138 @@
                   <strong>Alemania vs Paraguay</strong>
                   <span>2026-06-29 · 22:30 · Grupo R32</span>
                 </div>
-                <b class="result-pill played">Resultado 1-1<span>Penaltis: Paraguay</span></b>
+                <b class="result-pill played">Resultado <span class="scoreline has-shootout result-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num penalty-winner">1</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-miss">
                         <td>Alberto Erhardt</td>
-                        <td>1-0<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Alemania vs Paraguay">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Alemania vs Paraguay</span>
+  </span></div>
+  </div></td>
+                        <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Carlos</td>
-                        <td>3-0<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Alemania vs Paraguay">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Alemania vs Paraguay</span>
+  </span></div>
+  </div></td>
+                        <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Dani</td>
-                        <td>3-0<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Alemania vs Paraguay">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Alemania vs Paraguay</span>
+  </span></div>
+  </div></td>
+                        <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Becario</td>
-                        <td>4-1<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">4</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Alemania vs Paraguay">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Alemania vs Paraguay</span>
+  </span></div>
+  </div></td>
+                        <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Gonzalo Carrero</td>
-                        <td>3-1<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Alemania vs Paraguay">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Alemania vs Paraguay</span>
+  </span></div>
+  </div></td>
+                        <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Jose</td>
-                        <td>2-0<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Alemania vs Paraguay">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Alemania vs Paraguay</span>
+  </span></div>
+  </div></td>
+                        <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Serena &amp; Andrea</td>
-                        <td>5-1<span class="pick-detail">Cruce de su porra: <strong>Alemania vs Paraguay</strong></span></td>
-                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">5</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Alemania vs Paraguay">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Alemania vs Paraguay</span>
+  </span></div>
+  </div></td>
+                        <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
@@ -1615,57 +2807,138 @@
                   <strong>Paises Bajos vs Marruecos</strong>
                   <span>2026-06-30 · 03:00 · Grupo R32</span>
                 </div>
-                <b class="result-pill played">Resultado 1-1<span>Penaltis: Marruecos</span></b>
+                <b class="result-pill played">Resultado <span class="scoreline has-shootout result-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num penalty-winner">1</span>
+  </span></b>
               </header>
               <table>
                 <tbody>
                   
                       <tr class="pick-exact">
                         <td>Alberto Erhardt</td>
-                        <td>1-1<span class="pick-detail">Penaltis: Marruecos</span><span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td>Exacto<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline has-shootout pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num penalty-winner">1</span>
+  </span>
+    <div class="pick-meta"><span class="tiebreak-chip tiebreak-ok">Tanda OK</span><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Paises Bajos vs Marruecos</span>
+  </span></div>
+  </div></td>
+                        <td>Exacto</td>
                         <td>5</td>
                       </tr>
                     
                       <tr class="pick-exact">
                         <td>Carlos</td>
-                        <td>1-1<span class="pick-detail">Penaltis: Marruecos</span><span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td>Exacto<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline has-shootout pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num penalty-winner">1</span>
+  </span>
+    <div class="pick-meta"><span class="tiebreak-chip tiebreak-ok">Tanda OK</span><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Paises Bajos vs Marruecos</span>
+  </span></div>
+  </div></td>
+                        <td>Exacto</td>
                         <td>5</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Dani</td>
-                        <td>2-1<span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Paises Bajos vs Marruecos</span>
+  </span></div>
+  </div></td>
+                        <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Becario</td>
-                        <td>2-3<span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td>Ganador<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Paises Bajos vs Marruecos</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-sign">
                         <td>Gonzalo Carrero</td>
-                        <td>1-2<span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td>Ganador<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Paises Bajos vs Marruecos</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador</td>
                         <td>1</td>
                       </tr>
                     
                       <tr class="pick-miss">
                         <td>Jose</td>
-                        <td>2-0<span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td>Fallado<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Paises Bajos vs Marruecos</span>
+  </span></div>
+  </div></td>
+                        <td>Fallado</td>
                         <td>0</td>
                       </tr>
                     
                       <tr class="pick-diff">
                         <td>Serena &amp; Andrea</td>
-                        <td>2-2<span class="pick-detail">Penaltis: Marruecos</span><span class="pick-detail">Cruce de su porra: <strong>Paises Bajos vs Marruecos</strong></span></td>
-                        <td>Ganador + dif.<span class="pick-detail">Equipos 2/2 · x1</span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline has-shootout pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num penalty-winner">2</span>
+  </span>
+    <div class="pick-meta"><span class="tiebreak-chip tiebreak-ok">Tanda OK</span><span class="route-chip route-exact" title="Cruce de su porra: Paises Bajos vs Marruecos">
+    <b>Cruce 2/2</b>
+    <em>x1</em>
+    <span>Paises Bajos vs Marruecos</span>
+  </span></div>
+  </div></td>
+                        <td>Ganador + dif.</td>
                         <td>2</td>
                       </tr>
                     
@@ -1686,49 +2959,126 @@
                   
                       <tr class="pick-pending">
                         <td>Alberto Erhardt</td>
-                        <td>1-2<span class="pick-detail">Cruce de su porra: <strong>Costa de Marfil vs Noruega</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Costa de Marfil vs Noruega">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Costa de Marfil vs Noruega</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Carlos</td>
-                        <td>1-3<span class="pick-detail">Cruce de su porra: <strong>Costa de Marfil vs Noruega</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Costa de Marfil vs Noruega">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Costa de Marfil vs Noruega</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Dani</td>
-                        <td>1-3<span class="pick-detail">Cruce de su porra: <strong>Costa de Marfil vs Noruega</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Costa de Marfil vs Noruega">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Costa de Marfil vs Noruega</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Gonzalo Becario</td>
-                        <td>1-3<span class="pick-detail">Cruce de su porra: <strong>Costa de Marfil vs Noruega</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Costa de Marfil vs Noruega">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Costa de Marfil vs Noruega</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Gonzalo Carrero</td>
-                        <td>0-2<span class="pick-detail">Cruce de su porra: <strong>Costa de Marfil vs Noruega</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Costa de Marfil vs Noruega">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Costa de Marfil vs Noruega</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Jose</td>
-                        <td>0-3<span class="pick-detail">Cruce de su porra: <strong>Costa de Marfil vs Noruega</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">0</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Costa de Marfil vs Noruega">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Costa de Marfil vs Noruega</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Serena &amp; Andrea</td>
-                        <td>1-3<span class="pick-detail">Cruce de su porra: <strong>Costa de Marfil vs Noruega</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">3</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Costa de Marfil vs Noruega">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Costa de Marfil vs Noruega</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
@@ -1750,49 +3100,126 @@
                   
                       <tr class="pick-pending">
                         <td>Alberto Erhardt</td>
-                        <td>2-0<span class="pick-detail">Cruce de su porra: <strong>Francia vs Suecia</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Francia vs Suecia">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Francia vs Suecia</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Carlos</td>
-                        <td>3-1<span class="pick-detail">Cruce de su porra: <strong>Francia vs Suecia</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Francia vs Suecia">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Francia vs Suecia</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Dani</td>
-                        <td>4-0<span class="pick-detail">Cruce de su porra: <strong>Francia vs Suecia</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">4</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Francia vs Suecia">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Francia vs Suecia</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Gonzalo Becario</td>
-                        <td>3-1<span class="pick-detail">Cruce de su porra: <strong>Francia vs Suecia</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Francia vs Suecia">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Francia vs Suecia</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Gonzalo Carrero</td>
-                        <td>2-1<span class="pick-detail">Cruce de su porra: <strong>Francia vs Suecia</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Francia vs Suecia">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Francia vs Suecia</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Jose</td>
-                        <td>3-1<span class="pick-detail">Cruce de su porra: <strong>Francia vs Suecia</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Francia vs Suecia">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Francia vs Suecia</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Serena &amp; Andrea</td>
-                        <td>2-0<span class="pick-detail">Cruce de su porra: <strong>Francia vs Suecia</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Francia vs Suecia">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Francia vs Suecia</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
@@ -1814,49 +3241,126 @@
                   
                       <tr class="pick-pending">
                         <td>Alberto Erhardt</td>
-                        <td>1-1<span class="pick-detail">Penaltis: Mexico</span><span class="pick-detail">Cruce de su porra: <strong>Mexico vs Ecuador</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline has-shootout pick-score">
+    <span class="score-num penalty-winner">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Mexico vs Ecuador">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Mexico vs Ecuador</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Carlos</td>
-                        <td>1-0<span class="pick-detail">Cruce de su porra: <strong>Mexico vs Ecuador</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Mexico vs Ecuador">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Mexico vs Ecuador</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Dani</td>
-                        <td>2-1<span class="pick-detail">Cruce de su porra: <strong>Mexico vs Ecuador</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Mexico vs Ecuador">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Mexico vs Ecuador</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Gonzalo Becario</td>
-                        <td>2-1<span class="pick-detail">Cruce de su porra: <strong>Mexico vs Ecuador</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Mexico vs Ecuador">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Mexico vs Ecuador</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Gonzalo Carrero</td>
-                        <td>3-2<span class="pick-detail">Cruce de su porra: <strong>Mexico vs Ecuador</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Mexico vs Ecuador">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Mexico vs Ecuador</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Jose</td>
-                        <td>2-0<span class="pick-detail">Cruce de su porra: <strong>Mexico vs Ecuador</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Mexico vs Ecuador">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Mexico vs Ecuador</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Serena &amp; Andrea</td>
-                        <td>3-0<span class="pick-detail">Cruce de su porra: <strong>Mexico vs Ecuador</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Mexico vs Ecuador">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Mexico vs Ecuador</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
@@ -1878,49 +3382,126 @@
                   
                       <tr class="pick-pending">
                         <td>Alberto Erhardt</td>
-                        <td>3-0<span class="pick-detail">Cruce de su porra: <strong>Inglaterra vs RD Congo</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Inglaterra vs RD Congo">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Inglaterra vs RD Congo</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Carlos</td>
-                        <td>3-0<span class="pick-detail">Cruce de su porra: <strong>Inglaterra vs RD Congo</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Inglaterra vs RD Congo">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Inglaterra vs RD Congo</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Dani</td>
-                        <td>5-0<span class="pick-detail">Cruce de su porra: <strong>Inglaterra vs RD Congo</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">5</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Inglaterra vs RD Congo">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Inglaterra vs RD Congo</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Gonzalo Becario</td>
-                        <td>3-2<span class="pick-detail">Cruce de su porra: <strong>Inglaterra vs RD Congo</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Inglaterra vs RD Congo">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Inglaterra vs RD Congo</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Gonzalo Carrero</td>
-                        <td>1-0<span class="pick-detail">Cruce de su porra: <strong>Inglaterra vs RD Congo</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Inglaterra vs RD Congo">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Inglaterra vs RD Congo</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Jose</td>
-                        <td>3-0<span class="pick-detail">Cruce de su porra: <strong>Inglaterra vs RD Congo</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Inglaterra vs RD Congo">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Inglaterra vs RD Congo</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Serena &amp; Andrea</td>
-                        <td>3-0<span class="pick-detail">Cruce de su porra: <strong>Inglaterra vs RD Congo</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Inglaterra vs RD Congo">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Inglaterra vs RD Congo</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
@@ -1942,49 +3523,126 @@
                   
                       <tr class="pick-pending">
                         <td>Alberto Erhardt</td>
-                        <td>1-1<span class="pick-detail">Penaltis: Senegal</span><span class="pick-detail">Cruce de su porra: <strong>Bélgica vs Senegal</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline has-shootout pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num penalty-winner">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Bélgica vs Senegal">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Bélgica vs Senegal</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Carlos</td>
-                        <td>2-2<span class="pick-detail">Penaltis: Senegal</span><span class="pick-detail">Cruce de su porra: <strong>Bélgica vs Senegal</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline has-shootout pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num penalty-winner">2</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Bélgica vs Senegal">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Bélgica vs Senegal</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Dani</td>
-                        <td>3-0<span class="pick-detail">Cruce de su porra: <strong>Bélgica vs Senegal</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Bélgica vs Senegal">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Bélgica vs Senegal</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Gonzalo Becario</td>
-                        <td>1-0<span class="pick-detail">Cruce de su porra: <strong>Bélgica vs Senegal</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Bélgica vs Senegal">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Bélgica vs Senegal</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Gonzalo Carrero</td>
-                        <td>1-2<span class="pick-detail">Cruce de su porra: <strong>Bélgica vs Senegal</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">1</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">2</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Bélgica vs Senegal">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Bélgica vs Senegal</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Jose</td>
-                        <td>2-1<span class="pick-detail">Cruce de su porra: <strong>Bélgica vs Senegal</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Bélgica vs Senegal">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Bélgica vs Senegal</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Serena &amp; Andrea</td>
-                        <td>2-1<span class="pick-detail">Cruce de su porra: <strong>Bélgica vs Senegal</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Bélgica vs Senegal">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Bélgica vs Senegal</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
@@ -2006,49 +3664,126 @@
                   
                       <tr class="pick-pending">
                         <td>Alberto Erhardt</td>
-                        <td>2-1<span class="pick-detail">Cruce de su porra: <strong>Estados Unidos vs Bosnia y Herzegovina</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Estados Unidos vs Bosnia y Herzegovina">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Estados Unidos vs Bosnia y Herzegovina</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Carlos</td>
-                        <td>4-1<span class="pick-detail">Cruce de su porra: <strong>Estados Unidos vs Bosnia y Herzegovina</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">4</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Estados Unidos vs Bosnia y Herzegovina">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Estados Unidos vs Bosnia y Herzegovina</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Dani</td>
-                        <td>2-1<span class="pick-detail">Cruce de su porra: <strong>Estados Unidos vs Bosnia y Herzegovina</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Estados Unidos vs Bosnia y Herzegovina">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Estados Unidos vs Bosnia y Herzegovina</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Gonzalo Becario</td>
-                        <td>2-1<span class="pick-detail">Cruce de su porra: <strong>Estados Unidos vs Bosnia y Herzegovina</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Estados Unidos vs Bosnia y Herzegovina">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Estados Unidos vs Bosnia y Herzegovina</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Gonzalo Carrero</td>
-                        <td>2-0<span class="pick-detail">Cruce de su porra: <strong>Estados Unidos vs Bosnia y Herzegovina</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Estados Unidos vs Bosnia y Herzegovina">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Estados Unidos vs Bosnia y Herzegovina</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Jose</td>
-                        <td>2-1<span class="pick-detail">Cruce de su porra: <strong>Estados Unidos vs Bosnia y Herzegovina</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">2</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">1</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Estados Unidos vs Bosnia y Herzegovina">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Estados Unidos vs Bosnia y Herzegovina</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
                     
                       <tr class="pick-pending">
                         <td>Serena &amp; Andrea</td>
-                        <td>3-0<span class="pick-detail">Cruce de su porra: <strong>Estados Unidos vs Bosnia y Herzegovina</strong></span></td>
+                        <td><div class="pick-cell">
+    <span class="scoreline  pick-score">
+    <span class="score-num ">3</span>
+    <span class="score-sep">-</span>
+    <span class="score-num ">0</span>
+  </span>
+    <div class="pick-meta"><span class="route-chip route-miss" title="Cruce de su porra: Estados Unidos vs Bosnia y Herzegovina">
+    <b>Cruce 0/2</b>
+    <em>x1/3</em>
+    <span>Estados Unidos vs Bosnia y Herzegovina</span>
+  </span></div>
+  </div></td>
                         <td></td>
                         <td></td>
                       </tr>
