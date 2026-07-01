@@ -124,7 +124,9 @@
     .result-pill.played { color: #fff; background: var(--blue); box-shadow: 0 0 0 3px rgba(15,95,255,.22); }
     .match-card tr { transition: background .15s ease; }
     .match-card td { vertical-align: top; }
-    .match-card td:nth-child(2), .match-card td:nth-child(3), .match-card td:nth-child(4) { text-align: right; font-weight: 950; white-space: normal; overflow-wrap: anywhere; }
+    .match-card td:nth-child(2), .match-card td:nth-child(3) { text-align: right; font-weight: 950; white-space: normal; overflow-wrap: anywhere; }
+    .match-card td:nth-child(4) { min-width: 38px; text-align: right; font-weight: 950; white-space: nowrap; overflow-wrap: normal; }
+    .points-value { display: inline-flex; justify-content: flex-end; min-width: 2.4ch; white-space: nowrap; font-variant-numeric: tabular-nums; }
     .match-card td:nth-child(2) { min-width: 140px; }
     .match-card td:nth-child(3) { min-width: 112px; }
     .pick-cell { display: grid; justify-items: end; gap: 4px; min-width: 0; }
@@ -154,6 +156,13 @@
       th, td { padding: 8px; }
       .match-card header { grid-template-columns: 1fr; }
       .result-pill { justify-self: start; }
+      .match-card table, .match-card tbody { display: block; width: 100%; }
+      .match-card tr { display: grid; grid-template-columns: minmax(72px, 1fr) minmax(72px, .9fr) minmax(66px, .75fr) 64px; align-items: center; border-bottom: 1px solid var(--line); }
+      .match-card td { display: block; min-width: 0; border-bottom: 0; padding: 7px 5px; }
+      .match-card td:first-child { overflow-wrap: anywhere; }
+      .match-card td:nth-child(2), .match-card td:nth-child(3) { min-width: 0; }
+      .match-card td:nth-child(4) { min-width: 0; padding-left: 4px; padding-right: 4px; text-align: center; }
+      .match-card td:nth-child(4) .points-value { justify-content: center; min-width: 4ch; }
     }
     .dot.pending { background: var(--gold); }
     .pick-detail { display: block; margin-top: 4px; color: #5f6b7a; font-size: .78rem; line-height: 1.35; }
@@ -313,7 +322,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-exact">
@@ -327,7 +336,7 @@
     
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -341,7 +350,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -351,7 +360,7 @@
     
   </div></td>
                         <td>Fuera de plazo</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -365,7 +374,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -379,7 +388,7 @@
     
   </div></td>
                         <td>Fuera de plazo</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -393,7 +402,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                 </tbody>
@@ -426,7 +435,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -440,7 +449,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -454,7 +463,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -464,7 +473,7 @@
     
   </div></td>
                         <td>Fuera de plazo</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -478,7 +487,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -492,7 +501,7 @@
     
   </div></td>
                         <td>Fuera de plazo</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -506,7 +515,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                 </tbody>
@@ -539,7 +548,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-exact">
@@ -553,7 +562,7 @@
     
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -567,7 +576,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -577,7 +586,7 @@
     
   </div></td>
                         <td>Fuera de plazo</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -591,7 +600,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -605,7 +614,7 @@
     
   </div></td>
                         <td>Fuera de plazo</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -619,7 +628,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                 </tbody>
@@ -652,7 +661,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -666,7 +675,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -680,7 +689,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -690,7 +699,7 @@
     
   </div></td>
                         <td>Fuera de plazo</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -704,7 +713,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -718,7 +727,7 @@
     
   </div></td>
                         <td>Fuera de plazo</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -732,7 +741,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                 </tbody>
@@ -765,7 +774,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -779,7 +788,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -793,7 +802,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -803,7 +812,7 @@
     
   </div></td>
                         <td>Fuera de plazo</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -817,7 +826,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -831,7 +840,7 @@
     
   </div></td>
                         <td>Fuera de plazo</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -845,7 +854,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                 </tbody>
@@ -878,7 +887,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -892,7 +901,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -906,7 +915,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -916,7 +925,7 @@
     
   </div></td>
                         <td>Fuera de plazo</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -930,7 +939,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -944,7 +953,7 @@
     
   </div></td>
                         <td>Fuera de plazo</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -958,7 +967,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                 </tbody>
@@ -991,7 +1000,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-exact">
@@ -1005,7 +1014,7 @@
     
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1019,7 +1028,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1033,7 +1042,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1047,7 +1056,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1061,7 +1070,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1075,7 +1084,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                 </tbody>
@@ -1108,7 +1117,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1122,7 +1131,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1136,7 +1145,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1150,7 +1159,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1164,7 +1173,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1178,7 +1187,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1192,7 +1201,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                 </tbody>
@@ -1225,7 +1234,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1239,7 +1248,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1253,7 +1262,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1267,7 +1276,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1281,7 +1290,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1295,7 +1304,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1309,7 +1318,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                 </tbody>
@@ -1342,7 +1351,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1356,7 +1365,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1370,7 +1379,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1384,7 +1393,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1398,7 +1407,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1412,7 +1421,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -1426,7 +1435,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                 </tbody>
@@ -1459,7 +1468,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1473,7 +1482,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-exact">
@@ -1487,7 +1496,7 @@
     
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -1501,7 +1510,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1515,7 +1524,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-exact">
@@ -1529,7 +1538,7 @@
     
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1543,7 +1552,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                 </tbody>
@@ -1576,7 +1585,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1590,7 +1599,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1604,7 +1613,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1618,7 +1627,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1632,7 +1641,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1646,7 +1655,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1660,7 +1669,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                 </tbody>
@@ -1693,7 +1702,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1707,7 +1716,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1721,7 +1730,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-exact">
@@ -1735,7 +1744,7 @@
     
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -1749,7 +1758,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1763,7 +1772,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-exact">
@@ -1777,7 +1786,7 @@
     
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                 </tbody>
@@ -1810,7 +1819,7 @@
     
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-exact">
@@ -1824,7 +1833,7 @@
     
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1838,7 +1847,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1852,7 +1861,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -1866,7 +1875,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1880,7 +1889,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -1894,7 +1903,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                 </tbody>
@@ -1927,7 +1936,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1941,7 +1950,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1955,7 +1964,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1969,7 +1978,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1983,7 +1992,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -1997,7 +2006,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2011,7 +2020,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                 </tbody>
@@ -2044,7 +2053,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2058,7 +2067,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -2072,7 +2081,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2086,7 +2095,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -2100,7 +2109,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2114,7 +2123,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2128,7 +2137,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                 </tbody>
@@ -2161,7 +2170,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2175,7 +2184,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2189,7 +2198,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2203,7 +2212,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -2217,7 +2226,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2231,7 +2240,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2245,7 +2254,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                 </tbody>
@@ -2278,7 +2287,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -2292,7 +2301,7 @@
     
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2306,7 +2315,7 @@
     
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2320,7 +2329,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2334,7 +2343,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2348,7 +2357,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2362,7 +2371,7 @@
     
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                 </tbody>
@@ -2398,7 +2407,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2415,7 +2424,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2432,7 +2441,7 @@
   </span></div>
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -2449,7 +2458,7 @@
   </span></div>
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-exact">
@@ -2466,7 +2475,7 @@
   </span></div>
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2483,7 +2492,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2500,7 +2509,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                 </tbody>
@@ -2536,7 +2545,7 @@
   </span></div>
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2553,7 +2562,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2570,7 +2579,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2587,7 +2596,7 @@
   </span></div>
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2604,7 +2613,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2621,7 +2630,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -2638,7 +2647,7 @@
   </span></div>
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                 </tbody>
@@ -2674,7 +2683,7 @@
   </span></div>
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2691,7 +2700,7 @@
   </span></div>
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2708,7 +2717,7 @@
   </span></div>
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2725,7 +2734,7 @@
   </span></div>
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2742,7 +2751,7 @@
   </span></div>
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2759,7 +2768,7 @@
   </span></div>
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2776,7 +2785,7 @@
   </span></div>
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                 </tbody>
@@ -2812,7 +2821,7 @@
   </span></div>
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-exact">
@@ -2829,7 +2838,7 @@
   </span></div>
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2846,7 +2855,7 @@
   </span></div>
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2863,7 +2872,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2880,7 +2889,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-miss">
@@ -2897,7 +2906,7 @@
   </span></div>
   </div></td>
                         <td>Fallado</td>
-                        <td>0</td>
+                        <td class="match-points"><span class="points-value">0</span></td>
                       </tr>
                     
                       <tr class="pick-diff">
@@ -2914,7 +2923,7 @@
   </span></div>
   </div></td>
                         <td>Ganador + dif.</td>
-                        <td>2</td>
+                        <td class="match-points"><span class="points-value">2</span></td>
                       </tr>
                     
                 </tbody>
@@ -2950,7 +2959,7 @@
   </span></div>
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2967,7 +2976,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -2984,7 +2993,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3001,7 +3010,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3017,8 +3026,8 @@
     <span>CUW-NOR</span>
   </span></div>
   </div></td>
-                        <td>Ganador<span class="pick-detail">base 1 pts, x1/2</span></td>
-                        <td>0.5</td>
+                        <td>Ganador</td>
+                        <td class="match-points"><span class="points-value">0.5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3035,7 +3044,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3051,8 +3060,8 @@
     <span>CIV-FRA</span>
   </span></div>
   </div></td>
-                        <td>Ganador<span class="pick-detail">base 1 pts, x1/2</span></td>
-                        <td>0.5</td>
+                        <td>Ganador</td>
+                        <td class="match-points"><span class="points-value">0.5</span></td>
                       </tr>
                     
                 </tbody>
@@ -3088,7 +3097,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3105,7 +3114,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3121,8 +3130,8 @@
     <span>FRA-IRN</span>
   </span></div>
   </div></td>
-                        <td>Ganador<span class="pick-detail">base 1 pts, x1/2</span></td>
-                        <td>0.5</td>
+                        <td>Ganador</td>
+                        <td class="match-points"><span class="points-value">0.5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3138,8 +3147,8 @@
     <span>FRA-IRN</span>
   </span></div>
   </div></td>
-                        <td>Ganador<span class="pick-detail">base 1 pts, x1/2</span></td>
-                        <td>0.5</td>
+                        <td>Ganador</td>
+                        <td class="match-points"><span class="points-value">0.5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3155,8 +3164,8 @@
     <span>FRA-ESP</span>
   </span></div>
   </div></td>
-                        <td>Ganador<span class="pick-detail">base 1 pts, x1/2</span></td>
-                        <td>0.5</td>
+                        <td>Ganador</td>
+                        <td class="match-points"><span class="points-value">0.5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3173,7 +3182,7 @@
   </span></div>
   </div></td>
                         <td>Ganador</td>
-                        <td>1</td>
+                        <td class="match-points"><span class="points-value">1</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3189,8 +3198,8 @@
     <span>NOR-SWE</span>
   </span></div>
   </div></td>
-                        <td>Ganador<span class="pick-detail">base 1 pts, x1/2</span></td>
-                        <td>0.5</td>
+                        <td>Ganador</td>
+                        <td class="match-points"><span class="points-value">0.5</span></td>
                       </tr>
                     
                 </tbody>
@@ -3225,8 +3234,8 @@
     <span>MEX-SEN</span>
   </span></div>
   </div></td>
-                        <td>Ganador<span class="pick-detail">base 1 pts, x1/2</span></td>
-                        <td>0.5</td>
+                        <td>Ganador</td>
+                        <td class="match-points"><span class="points-value">0.5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3242,8 +3251,8 @@
     <span>MEX-SEN</span>
   </span></div>
   </div></td>
-                        <td>Ganador<span class="pick-detail">base 1 pts, x1/2</span></td>
-                        <td>0.5</td>
+                        <td>Ganador</td>
+                        <td class="match-points"><span class="points-value">0.5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3259,8 +3268,8 @@
     <span>MEX-SEN</span>
   </span></div>
   </div></td>
-                        <td>Ganador<span class="pick-detail">base 1 pts, x1/2</span></td>
-                        <td>0.5</td>
+                        <td>Ganador</td>
+                        <td class="match-points"><span class="points-value">0.5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3276,8 +3285,8 @@
     <span>MEX-SWE</span>
   </span></div>
   </div></td>
-                        <td>Ganador<span class="pick-detail">base 1 pts, x1/2</span></td>
-                        <td>0.5</td>
+                        <td>Ganador</td>
+                        <td class="match-points"><span class="points-value">0.5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3293,8 +3302,8 @@
     <span>MEX-CIV</span>
   </span></div>
   </div></td>
-                        <td>Ganador<span class="pick-detail">base 1 pts, x1/2</span></td>
-                        <td>0.5</td>
+                        <td>Ganador</td>
+                        <td class="match-points"><span class="points-value">0.5</span></td>
                       </tr>
                     
                       <tr class="pick-exact">
@@ -3311,7 +3320,7 @@
   </span></div>
   </div></td>
                         <td>Exacto</td>
-                        <td>5</td>
+                        <td class="match-points"><span class="points-value">5</span></td>
                       </tr>
                     
                       <tr class="pick-sign">
@@ -3327,8 +3336,8 @@
     <span>MEX-SEN</span>
   </span></div>
   </div></td>
-                        <td>Ganador<span class="pick-detail">base 1 pts, x1/2</span></td>
-                        <td>0.5</td>
+                        <td>Ganador</td>
+                        <td class="match-points"><span class="points-value">0.5</span></td>
                       </tr>
                     
                 </tbody>
@@ -3360,7 +3369,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3377,7 +3386,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3394,7 +3403,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3411,7 +3420,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3428,7 +3437,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3445,7 +3454,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3462,7 +3471,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                 </tbody>
@@ -3494,7 +3503,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3511,7 +3520,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3528,7 +3537,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3545,7 +3554,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3562,7 +3571,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3579,7 +3588,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3596,7 +3605,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                 </tbody>
@@ -3628,7 +3637,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3645,7 +3654,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3662,7 +3671,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3679,7 +3688,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3696,7 +3705,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3713,7 +3722,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                       <tr class="pick-pending">
@@ -3730,7 +3739,7 @@
     </span></div>
   </div></td>
                         <td></td>
-                        <td></td>
+                        <td class="match-points"></td>
                       </tr>
                     
                 </tbody>
